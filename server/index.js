@@ -8,10 +8,14 @@ app.listen(3001, ()=>{
     console.log('server running')
 })
 
+const reactPath = path.join(__dirname, 'react-app/build/index.html') 
+console.log(reactPath)
+app.use(express.static(path.join(__dirname, 'react-app/build/')))
+
 app.get('/', (req, res)=>{
-    res.sendFile(path.join(__dirname, 'react-app/build/index.html'))
+    res.sendFile(reactPath)
 })
 
 app.get('*', (req, res)=> {
-    res.sendFile(path.join(__dirname, 'react-app/build/index.html'))
+    res.sendFile(reactPath)
 })
