@@ -15,17 +15,6 @@ const dbConfig = {
 };
 
 
-// const dbConfig = {
-//     host: 'pukkuk.pp.ua',
-//     port: 15000,
-//     user: 'root',
-//     password: 'jeongsumin0701!',
-//     database: 'yydh',
-//     connectionLimit: 10,
-//     waitForConnections: false,
-//     multipleStatements: true
-// };
-
 function getPool() {
     const pool = mysql.createPool(dbConfig);
     return pool;
