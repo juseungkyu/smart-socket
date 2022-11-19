@@ -3,8 +3,8 @@ const dbConn = require('../DB/dbConn');
 const con = dbConn.getPool();
 
 module.exports = class DAO {
-    run(sql, data, result) {
-        let res = []
+    async run(sql, data, result) {
+        console.log('run:', result)
         try {
             con.getConnection((err, connection) => {
                 if (err) {
@@ -12,14 +12,13 @@ module.exports = class DAO {
                     return;
                 }
 
-                var exec = connection.query(sql, data, function (err, rows) {
+                connection.query(sql, data, (err, rows) => {
                     if (err) {
                         console.error("err : " + err);
                         return err;
                     }
-                    console.log('실행 대상 SQL: ' + exec.sql)
-                    console.log(rows)
                     result.dbResult = rows;
+                    console.log('query function:', result)
                     connection.release();
                     
                 })

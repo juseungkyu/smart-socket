@@ -105,3 +105,7 @@ ul {
 .w-100 {
     width: 100%;
 }
+
+.flex-col {
+    flex-direction: column;
+}

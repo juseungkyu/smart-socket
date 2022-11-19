@@ -1,0 +1,4 @@
+.deviceView {
+    display: flex;
+    flex-direction: column;
+}
