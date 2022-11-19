@@ -8,7 +8,7 @@ module.exports = class extends DAO {
   //사용자 가져오는 함수
   getMember(memberId) {
     const result = {}
-    const sql = 'select * from member where memberid=?';
+    const sql = 'select * from member where member_id=?';
     const data = [memberId]
     const isSuccess = this.run(sql, data, result)
 
