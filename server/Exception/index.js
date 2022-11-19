@@ -1,6 +1,5 @@
 const fs = require('fs').promises
 const path = require('path')
-// eslint-disable-next-line import/no-dynamic-require
 const config = require('../../config/config')
 const Exception = require('./Exception')
 
@@ -24,7 +23,6 @@ module.exports = new (class {
     if (!(err instanceof Exception)) {
       return false
     }
-    // this.list.push(err)
 
     this.list.push(err)
 
@@ -40,7 +38,7 @@ module.exports = new (class {
   }
 
   async writeLog(error) {
-    const fileRoot = path.join(this.root, '/_log/errorLog') // process.env에 root박기 // 수정 config 에 있음
+    const fileRoot = path.join(this.root, '/_log/errorLog')
 
     const { message } = error
 

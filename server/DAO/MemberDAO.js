@@ -1,4 +1,4 @@
-const db = require('../DB/dbConn')
+const dbcon = require('../DB/dbConn')
 const exception = require('../Exception')
 
 const con = dbcon.getPool();
@@ -11,13 +11,13 @@ module.exports = class {
       con.getConnection(function (err, connection) {
         if (err) {
           console.error("err : " + err);
-          return next(err);
+          return err;
         }
         sql = 'select * from member where memberid=?';
         connection.query(sql, memberId, function (err, rows) {
           if (err) {
             console.error("err : " + err);
-            return next(err);
+            return err;
           }
           console.log("rows : " + JSON.stringify(rows));
 
