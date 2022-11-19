@@ -1,8 +1,3 @@
-const dbConn = require('../DB/dbConn')
-const exception = require('../Exception')
-
-const con = dbConn.getPool();
-
 const DAO = require('./DAO')
 
 module.exports = class extends DAO {
@@ -71,30 +66,15 @@ module.exports = class extends DAO {
   // 사용자 삭제 함수
   // true, false로 반환.
   deleteMember(memberId) {
-    try {
-      con.getConnection(function (err, connection) {
-        if (err) {
-          console.error("err : " + err);
-          return err;
-        }
-        sql = 'delete member where memberid=?';
-        connection.query(sql, memberId, function (err) {
-          if (err) {
-            console.error("err : " + err);
-            return next(err);
-          }
+    const result = {}
+    const sql = 'delete member where memberid=?';
+    const data = { memberId, memberPwd, memberName}
+    
+    const isSuccess = this.run(sql, data, result)
 
-          req.db_result = rows;
-          connection.release();
-
-          next();
-        })
-      })
-      return true;
-    } catch (err) {
-      exception.addThrow(new Exception(ErrorCode, err.message))
-      return false;
+    return {
+      isSuccess,
+      result: result.dbResult
     }
   }
-
 }

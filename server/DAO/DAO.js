@@ -1,5 +1,4 @@
 const dbConn = require('../DB/dbConn')
-const exception = require('../Exception')
 
 const con = dbConn.getPool();
 
@@ -9,14 +8,12 @@ module.exports = class DAO {
             con.getConnection((err, connection) => {
                 if (err) {
                     console.error("err : " + err);
-                    exception.addThrow(new Exception(ErrorCode, err.message))
                     return;
                 }
 
                 connection.query(sql, data, function (err, rows) {
                     if (err) {
                         console.error("err : " + err);
-                        exception.addThrow(new Exception(ErrorCode, err.message))
                         return err;
                     }
 
@@ -27,7 +24,7 @@ module.exports = class DAO {
 
             return true
         } catch (err) {
-            exception.addThrow(new Exception(ErrorCode, err.message))
+            console.log(err)
             return false
         }
     }

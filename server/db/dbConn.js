@@ -3,6 +3,7 @@ const dotenv = require('dotenv').config();
 const { env } = require("process");
 
 const mysql = require("mysql");
+
 const dbConfig = {
     host: process.env.HOST,
     port: process.env.PORT,
@@ -14,13 +15,9 @@ const dbConfig = {
 };
 
 
-function createPool(next) {
-    pool = dbConfig
-    next()
-}
 function getPool() {
+    const pool = dbConfig
     return pool;
 }
 
-module.exports.createPool = createPool;
 module.exports.getPool = getPool;
