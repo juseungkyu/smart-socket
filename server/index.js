@@ -11,7 +11,11 @@ console.log("DB_USER:", process.env.USER);
 console.log("DB_PASS:", process.env.PASSWORD);
 
 async function start() {
-    console.log(await new MemberDAO().getMember('hi'))
+    const returnData = await new MemberDAO().getMember('hi')
+    const {isSuccess, result} = returnData
+
+    console.log(result[0])
+    console.log(result[0].member_id)
 }
 
 start()
