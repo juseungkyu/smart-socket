@@ -8,20 +8,19 @@ const dbConfig = {
     port: process.env.PORT,
     user: process.env.USER,
     password: process.env.PASSWORD,
-    connectionLimit:10,
-    waitForConnections:false,
+    connectionLimit: 10,
+    waitForConnections: false,
     multipleStatements: true
-  };
+};
 
 
-module.exports = {
-    init: function () {
-        return mysql.createConnection(dbConfig);
-    },
-    connect: function (conn) {
-        conn.connect(function (err) {
-            if (err) console.error('mysql connection error : ' + err);
-            else console.log('mysql is connected successfully!');
-        });
-    }
+function createPool(next) {
+    pool = dbConfig
+    next()
 }
+function getPool() {
+    return pool;
+}
+
+module.exports.createPool = createPool;
+module.exports.getPool = getPool;
