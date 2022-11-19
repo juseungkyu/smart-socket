@@ -16,7 +16,7 @@ module.exports = class extends DAO {
 
     return {
       isSuccess,
-      result: result
+      result: result.dbResult
     }
   }
 

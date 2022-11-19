@@ -8,15 +8,16 @@ const dbConfig = {
     port: process.env.PORT,
     user: process.env.USER,
     password: process.env.PASSWORD,
+    database: process.env.DATABASE,
     connectionLimit: 10,
     waitForConnections: false,
     multipleStatements: true
 };
 
-const pool  = promiseMysql.createPool(dbConfig);
+const pool = mysql.createPool(dbConfig);
 
-function getPool() {
-    return pool;
+async function getConnection() {
+    return await (await pool).getConnection();
 }
 
-module.exports.getPool = getPool;
+module.exports.getConnection = getConnection;

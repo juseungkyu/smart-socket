@@ -1,32 +1,19 @@
 const dbConn = require('../DB/dbConn');
 
-const con = dbConn.getPool();
-
 module.exports = class DAO {
     async run(sql, data, result) {
-        console.log('run:', result)
         try {
-            con.getConnection((err, connection) => {
-                if (err) {
-                    console.error("err : " + err);
-                    return;
-                }
+            const con = await dbConn.getConnection()
 
-                connection.query(sql, data, (err, rows) => {
-                    if (err) {
-                        console.error("err : " + err);
-                        return err;
-                    }
-                    result.dbResult = rows;
-                    console.log('query function:', result)
-                    connection.release();
-                    
-                })
-            })
-            
+            const dbResult = await con.query(sql, data)
+            result.dbResult = dbResult
+
+            await con.commit()
+            con.connection.release();
             return true
-        } catch (err) {
-            console.log(err)
+        } catch (error) {
+            console.log('db error:', error)
+            console.log('sql:', sql)
             return false
         }
     }
