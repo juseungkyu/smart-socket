@@ -1,7 +1,7 @@
-import './join.css'
+import './login.css'
 import Form from '../../basic/element/form/Form';
 
-function Join(props) {
+function Login(props) {
     const inputs = [
         {
             "label": 'id',
@@ -19,19 +19,19 @@ function Join(props) {
         },
     ]
 
-    const action = "/api/member/join"
+    const action = "/api/member/login"
     const method = "POST"
     return (
         <section>
-            <div className="join container d-flex justify-center align-center">
+            <div className="login container d-flex justify-center align-center">
                 <Form
                     inputs={inputs}
                     action={action}
                     method={method}
-                >회원가입</Form>
+                >로그인</Form>
             </div>
         </section>
     );
 }
 
-export default Join;
+export default Login;
