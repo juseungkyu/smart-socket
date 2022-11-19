@@ -36,30 +36,16 @@ module.exports = class extends DAO {
   //사용자 비밀번호 변경함수
   // true, false로 반환.
   modifyMemberPassword(memberId, memberPwd) {
-    try {
-      con.getConnection(function (err, connection) {
-        if (err) {
-          console.error("err : " + err);
-          return next(err);
-        }
-        let sql = 'update member set memberpwd=? where memberid=?';
-        let data = [memberPwd, memberId]
-        connection.query(sql, data, function (err) {
-          if (err) {
-            console.error("err : " + err);
-            return next(err);
-          }
 
-          req.db_result = rows;
-          connection.release();
+    const result = {}
+    const sql = 'update member set memberpwd=? where memberid=?';
+    const data = [memberId,memberPwd]
+    
+    const isSuccess = this.run(sql, data, result)
 
-          next();
-        })
-      })
-      return true
-    } catch (err) {
-      exception.addThrow(new Exception(ErrorCode, err.message))
-      return false
+    return {
+      isSuccess,
+      result: result.dbResult
     }
   }
 
