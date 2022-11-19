@@ -5,3 +5,9 @@ const MemberLoginController = require('./MemberLoginController')
 const MemberChangePassword = require('./MemberChangePassword')
 const MemberLogoutController = require('./MemberLogoutController')
 
+module.exports = {
+    MemberChangePassword,
+    MemberCreateController,
+    MemberLoginController,
+    MemberLogoutController,
+}

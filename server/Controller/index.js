@@ -1,8 +1,7 @@
-const express = require('express')
+const deviceController = require('./DeviceController')
+const memberController = require('./MemberController')
 
-const router = express.Router
-
-router.get('/', (req,res)=>{
-    console.log('hello');
-
-})
+module.exports = {
+  deviceController,
+  memberController,
+}

@@ -1,6 +1,6 @@
 const Controller = require('../Controller');
 
-const DeviceDAO = require('../../DAO/MemberDAO');
+const MemberDAO = require('../../DAO/MemberDAO');
 
 const MemberVO = require('../../VO/Member');
 
