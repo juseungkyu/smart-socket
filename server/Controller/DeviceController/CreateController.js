@@ -14,6 +14,7 @@ module.exports = class CreateController extends Controller {
 
     get = async (req, res)=>{
         console.log(req.params)
+        
     }
     
 }
