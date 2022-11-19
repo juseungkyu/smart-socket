@@ -1,4 +1,4 @@
-const conn = require('../db/dbConn')
+const conn = require('../DB/dbConn')
 //const vo = require('../VO/Device')
 
 

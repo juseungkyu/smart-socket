@@ -1,4 +1,4 @@
-const db = require('../db/dbConn')
+const db = require('../DB/dbConn')
 const exception = require('../Exception')
 
 const { Class, Sequelize, Member } = db

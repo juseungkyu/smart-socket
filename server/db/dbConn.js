@@ -1,8 +1,17 @@
-
 //mysql 사용하기
+const dotenv = require('dotenv').config();
+const { env } = require("process");
 
-var mysql = require("mysql");
-var dbConfig = require("./dbConfig.js");
+const mysql = require("mysql");
+const dbConfig = {
+    host: process.env.HOST,
+    port: process.env.PORT,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    connectionLimit:10,
+    waitForConnections:false,
+    multipleStatements: true
+  };
 
 
 module.exports = {
