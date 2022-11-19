@@ -1,37 +1,37 @@
-import './join.css'
+import './deviceCreate.css'
 import Form from '../../basic/element/form/Form';
 
-function Join(props) {
+function DeviceCreate(props) {
     const inputs = [
         {
-            "label": 'id',
+            "label": 'device id',
             "type": 'text',
-            "name": 'memberId',
+            "name": 'deviceId',
             "value": '',
             "readonly": false 
         },
         {
-            "label": 'password',
+            "label": 'name',
             "type": 'text',
-            "name": 'memberPw',
+            "name": 'deviceName',
             "value": '',
             "readonly": false
         },
     ]
 
-    const action = "/api/member/join"
+    const action = "/api/device/create"
     const method = "POST"
     return (
         <section>
-            <div className="join container d-flex justify-center align-center">
+            <div className="deviceCreate container d-flex justify-center align-center">
                 <Form
                     inputs={inputs}
                     action={action}
                     method={method}
-                >회원가입</Form>
+                >기기 등록하기</Form>
             </div>
         </section>
     );
 }
 
-export default Join;
+export default DeviceCreate;

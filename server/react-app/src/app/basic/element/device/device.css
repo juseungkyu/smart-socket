@@ -1,0 +1,13 @@
+.device {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.device.on {
+    background-color: rgb(220, 255, 220);
+}
+
+.device.off {
+    background-color: rgb(255, 220, 220);
+}

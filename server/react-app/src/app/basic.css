@@ -7,6 +7,7 @@
 body {
     position: relative;
     min-height: 100vh;
+    padding-bottom: 200px;
 }
 
 a {
@@ -91,8 +92,16 @@ ul {
 .mt-3  {
     margin-top: 20px;
 }
+.mt-4 {
+    margin: 50px;
+}
 
 .container {
     width: 1000px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.w-100 {
+    width: 100%;
 }
