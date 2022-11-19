@@ -11,6 +11,7 @@ import NotFound from './page/NotFound';
 import Main from './page/main/Main';
 import DeviceCreate from './page/deviceCreate/DeviceCreate';
 import DeviceList from './page/deviceList/DeviceList';
+import DeviceView from './page/deviceView/DeviceView';
 import Login from './page/login/Login';
 import Join from './page/join/Join';
 
@@ -24,6 +25,7 @@ function App(props) {
 
 					<Route path="/device/create" element={<DeviceCreate />}></Route>
 					<Route path="/device/list" element={<DeviceList />}></Route>
+					<Route path="/device/:deviceId" element={<DeviceView />}></Route>
 
 					<Route path="/login" element={<Login />}></Route>
 					<Route path="/join" element={<Join />}></Route>

@@ -6,12 +6,14 @@ function DeviceList(props) {
         {
             deviceId: 'djeb382lks9',
             deviceName: 'PC 콘센트',
-            state: 'F'
+            isConnect : 1,
+            state: 0
         },
         {
-            deviceId: 'djeb382lks9',
+            deviceId: '123124fg575',
             deviceName: '전등 콘센트',
-            state: 'T'
+            isConnect : 0,
+            state: 1
         },
     ]
 
@@ -20,11 +22,15 @@ function DeviceList(props) {
             <div className="deviceList gap-3 container">
                 {
                     deviceDumpDatas.map((device)=>{
-                        const {deviceId, deviceName, state} = device
+                        const {deviceId, deviceName, state, isConnect} = device
+
+                        console.log(deviceId, state, isConnect)
 
                         return (<Device 
+                            key={deviceId}
                             deviceId={deviceId}
                             deviceName={deviceName}
+                            isConnect={isConnect}
                             state={state}
                         />)
                     })

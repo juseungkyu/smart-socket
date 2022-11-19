@@ -8,6 +8,9 @@ console.log("DB_HOST:", process.env.HOST);
 console.log("DB_USER:", process.env.USER);
 console.log("DB_PASS:", process.env.PASSWORD);
 
+async function start() {
+    await 
+}
 
 const MemberDAO = require('./DAO/MemberDAO')
 
