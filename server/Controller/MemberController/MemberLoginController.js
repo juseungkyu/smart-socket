@@ -4,11 +4,11 @@ const DeviceDAO = require('../../DAO/MemberDAO');
 
 const MemberVO = require('../../VO/Member');
 
-module.exports = class HeartbeatController extends Controller {
+module.exports = class MemberLoginController extends Controller {
     constructor() {
         super();
         
-        this.deviceDAO = new DeviceDAO()
+        this.MemberDAO = new this.MemberDAO()
     }
 
     get = async (req, res)=>{

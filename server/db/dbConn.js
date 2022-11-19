@@ -1,8 +1,8 @@
 
-//Oracle 사용하기
+//mysql 사용하기
 
 var mysql = require("mysql");
-var dbConfig = require("./dbConfig");
+var dbConfig = require("./dbConfig.js");
 
 
 module.exports = {
