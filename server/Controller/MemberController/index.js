@@ -1,13 +1,13 @@
 //멤버 관련 컨트롤러
 
-const MemberCreateController = require('./MemberCreateController')
-const MemberLoginController = require('./MemberLoginController')
-const MemberChangePassword = require('./MemberChangePassword')
-const MemberLogoutController = require('./MemberLogoutController')
+const memberCreateController = require('./MemberCreateController')
+const memberLoginController = require('./MemberLoginController')
+const memberChangePassword = require('./MemberChangePassword')
+const memberLogoutController = require('./MemberLogoutController')
 
 module.exports = {
-    MemberChangePassword,
-    MemberCreateController,
-    MemberLoginController,
-    MemberLogoutController,
+    memberChangePassword,
+    memberCreateController,
+    memberLoginController,
+    memberLogoutController,
 }

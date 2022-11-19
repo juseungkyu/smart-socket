@@ -1,15 +1,15 @@
-const HeartbeatController = require('./HeartbeatController')
-const CreateController = require('./')
-const UpdateStateController = require('./')
-const GetDeviceController = require('./')
-const GetAllDeviceController = require('./')
+const heartbeatController = require('./HeartbeatController')
+const createController = require('./CreateController')
+const updateStateController = require('./UpdateStateController')
+const getDeviceController = require('./GetDeviceController')
+const getAllDeviceController = require('./GetAllDeviceController')
 
 
 module.exports = {
-    HeartbeatController,
-    CreateController,
-    UpdateStateController,
-    GetAllDeviceController,
-    GetDeviceController,
-  }
+    heartbeatController,
+    createController,
+    updateStateController,
+    getAllDeviceController,
+    getDeviceController,
+}
   

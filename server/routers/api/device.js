@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const controller = require('../../Controller/DeviceController')
+
 const heartbeatController = new controller.heartbeatController
 const createController = new controller.createController
 const updateStateController = new controller.updateStateController

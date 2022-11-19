@@ -1,8 +1,9 @@
 const router = require('express').Router()
 const controller = require('../../Controller/MemberController')
-const joinController = controller.joinController
-const loginController = controller.loginController
-const logoutController = controller.logoutController
+
+const joinController = new controller.memberCreateController
+const loginController = new controller.memberLoginController
+const logoutController = new controller.memberLogoutController
 
 router.get('/logout', logoutController.doGet)
 router.post('/login', loginController.doPost)
