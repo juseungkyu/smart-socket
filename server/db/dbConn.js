@@ -1,7 +1,7 @@
 //mysql 사용하기
 const dotenv = require('dotenv').config();
 const { env } = require("process");
-const mysql = require("mysql");
+const mysql = require("promise-mysql");
 
 const dbConfig = {
     host: process.env.HOST,
