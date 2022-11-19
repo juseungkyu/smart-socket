@@ -1,66 +1,40 @@
-const dbcon = require('../DB/dbConn')
+const dbConn = require('../DB/dbConn')
 const exception = require('../Exception')
 
-const con = dbcon.getPool();
+const con = dbConn.getPool();
 
-module.exports = class {
+const DAO = require('./DAO')
+
+module.exports = class extends DAO {
+  constructor() {
+    super()
+  }
 
   //사용자 가져오는 함수
   getMember(memberId) {
-    try {
-      con.getConnection(function (err, connection) {
-        if (err) {
-          console.error("err : " + err);
-          return err;
-        }
-        sql = 'select * from member where memberid=?';
-        connection.query(sql, memberId, function (err, rows) {
-          if (err) {
-            console.error("err : " + err);
-            return err;
-          }
-          console.log("rows : " + JSON.stringify(rows));
+    const result = {}
+    const sql = 'select * from member where memberid=?';
+    const data = [memberId]
+    const isSuccess = this.run(sql, data, result)
 
-          req.db_result = rows;
-          connection.release();
-
-          next();
-        })
-      })
-      return rows
-    } catch (err) {
-      exception.addThrow(new Exception(ErrorCode, err.message))
-      return null
+    return {
+      isSuccess,
+      result: result.dbResult
     }
   }
 
   // 사용자 추가함수
   // 성공시 true, 실패시 false로 리턴.
-  createMember = async (memberId, memberPwd, memberName) => {
-    try {
-      con.getConnection(function (err, connection) {
-        if (err) {
-          console.error("err : " + err);
-          return next(err);
-        }
-        let sql = 'insert into member set ?';
-        let data = { memberId: memberId, memberPwd: memberPwd, memberName: memberName }
-        connection.query(sql, data, function (err) {
-          if (err) {
-            console.error("err : " + err);
-            return next(err);
-          }
+  createMember(memberId, memberPwd, memberName) {
+    const result = {}
+    const sql = 'insert into member set ?';
+    const data = { memberId, memberPwd, memberName}
+    
+    const isSuccess = this.run(sql, data, result)
 
-          req.db_result = rows;
-          connection.release();
-
-          next();
-        })
-      })
-      return true
-    } catch (err) {
-      exception.addThrow(new Exception(ErrorCode, err.message))
-      return false
+    return {
+      isSuccess,
+      result: result.dbResult
     }
   }
 
@@ -101,7 +75,7 @@ module.exports = class {
       con.getConnection(function (err, connection) {
         if (err) {
           console.error("err : " + err);
-          return next(err);
+          return err;
         }
         sql = 'delete member where memberid=?';
         connection.query(sql, memberId, function (err) {

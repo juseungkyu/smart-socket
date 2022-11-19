@@ -23,7 +23,6 @@ module.exports = new (class {
     if (!(err instanceof Exception)) {
       return false
     }
-
     this.list.push(err)
 
     throw err
@@ -38,7 +37,7 @@ module.exports = new (class {
   }
 
   async writeLog(error) {
-    const fileRoot = path.join(this.root, '/_log/errorLog')
+    const fileRoot = path.join(this.root, '/_log/errorLog') // .env에 root박기 // config 에 있음
 
     const { message } = error
 

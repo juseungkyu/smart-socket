@@ -19,10 +19,10 @@ module.exports = class extends Error {
   }
 
   setErrorMessage() {
+    // 타임캘린터
     const dateStr = `[${moment().format(`ddd MMM DD hh:mm:ss YYYY`)}]`
     const processPid = `[pid: ${process.pid}]`
     const errorMessage = `${this.stack}`
     this.message = `${dateStr} ${processPid} ${errorMessage}`
   }
-  
 }
