@@ -11,18 +11,19 @@ module.exports = class MemberChangeController extends Controller {
     }
 
     get = async (req, res) => {
-        const { userId, userPwd, newUserPwd } = req.query
-        if (!userId || !userPwd || userPwd!=newUserPwd) {
-            this.sendFailure(400, 'bad request', res)
+        const { memberId, memberPwd, newMemberPwd } = req.query
+        if (!userId || !userPwd || memberPwd!=newUserPwd) {
+            this.sendResponse(false, 400, 'bad request', res)
             return
         }
 
         const info = await this.MemberDAO.modifyMemberPassword(userId, userPwd)
 
         if (info) {
-            this.sendSuccess(200, info, res)
+            this.sendResponse(true, 200, info, res)
         } else {
             this.sendFailure(404, 'not found', res)
+            this.sendResponse(false, 404, 'not found', res)
         }
     }
 
