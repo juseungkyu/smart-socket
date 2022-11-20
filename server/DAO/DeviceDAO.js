@@ -51,6 +51,22 @@ module.exports = class extends DAO {
     }
   }
 
+  //장치 연결 상태 함수
+  // true, false로 반환.
+  async changeDeviceConnect(deviceId, isConnect) {
+
+    const result = {}
+    const sql = 'update device set is_connect=? where device_id=?';
+    const data = [deviceId,isConnect]
+    
+    const isSuccess = await this.run(sql, data, result)
+
+    return {
+      isSuccess,
+      result: result.dbResult
+    }
+  }
+
   // 사용자 삭제 함수
   // true, false로 반환.
   async deleteMember(memberId) {
