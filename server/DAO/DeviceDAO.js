@@ -20,6 +20,20 @@ module.exports = class extends DAO {
     }
   }
 
+  async getAllDevice(memberId) {
+    const result = {
+      id : 1
+    }
+    const sql = 'select * from device where member_id = ?';
+    const data = [memberId]
+    const isSuccess = await this.run(sql, data, result)
+
+    return {
+      isSuccess,
+      result: result.dbResult
+    }
+  }
+
   async getDeviceState(deviceId) {
     const result = {
       id : 1
