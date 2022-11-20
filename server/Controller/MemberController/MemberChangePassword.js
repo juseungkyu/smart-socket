@@ -7,7 +7,7 @@ const MemberVO = require('../../VO/Member');
 module.exports = class MemberChangeController extends Controller {
     constructor() {
         super();
-        this.MemberDAO = new this.MemberDAO()
+        this.MemberDAO = new MemberDAO()
     }
 
     get = async (req, res) => {

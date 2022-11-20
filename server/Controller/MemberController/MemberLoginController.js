@@ -8,22 +8,22 @@ module.exports = class MemberLoginController extends Controller {
     constructor() {
         super();
         
-        this.MemberDAO = new this.MemberDAO()
+        this.MemberDAO = new MemberDAO()
     }
 
-    get = async (req, res) => {
-        const { userId, userPwd } = req.query
-        if (!userId || !userPwd) {
-            this.sendFailure(400, 'bad request', res)
+    post = async (req, res) => {
+        const { memberId, memberPw } = req.body
+        if (!memberId || !memberPw) {
+            this.sendResponse(false, 400, {message:'bad request'}, res);
             return
         }
 
-        const info = await this.MemberDAO.loginMember(userId, userPwd)
+        const {isSuccess} = await this.MemberDAO.loginMember(memberId, memberPw)
 
-        if (info) {
-            this.sendSuccess(200, info, res)
+        if (isSuccess) {
+            this.sendResponse(true, 200, {message:'로그인 성공'}, res);
         } else {
-            this.sendFailure(404, 'not found', res)
+            this.sendResponse(false, 404, {message:'유저 정보 확인 실패'}, res);
         }
     }
     

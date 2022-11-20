@@ -39,10 +39,10 @@ module.exports = class extends DAO {
 
   // 사용자 추가함수
   // 성공시 true, 실패시 false로 리턴.
-  async createMember(memberId, memberPwd, memberName) {
+  async createMember(memberId, memberPwd) {
     const result = {}
     const sql = 'insert into member set ?';
-    const data = { memberId, memberPwd, memberName}
+    const data = { memberId, memberPwd}
     
     const isSuccess = await this.run(sql, data, result)
 

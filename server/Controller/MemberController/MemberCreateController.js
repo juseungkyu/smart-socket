@@ -1,24 +1,21 @@
 const Controller = require('../Controller');
-
 const MemberDAO = require('../../DAO/MemberDAO');
-
 const MemberVO = require('../../VO/Member');
 
 module.exports = class MemberCreateController extends Controller {
     constructor() {
         super();
-        
-        this.MemberDAO = new this.MemberDAO()
+        this.MemberDAO = new MemberDAO()
     }
 
-    get = async (req, res) => {
-        const { memberId, memberPwd } = req.query
-        if (!userId || !memberPwd ) {
-            this.sendFailure(400, 'bad request', res)
+    post = async (req, res) => {
+        const { memberId, memberPw } = req.body
+        if (!memberId || !memberPw) {
+            this.sendResponse(false, 400, {message:'bad request'}, res);
             return
         }
 
-        const info = await this.MemberDAO.createMember(userId, userPwd)
+        const info = await this.MemberDAO.createMember(memberId, memberPw)
 
         if (info) {
             this.sendSuccess(200, info, res)
