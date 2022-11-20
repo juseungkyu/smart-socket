@@ -20,6 +20,34 @@ module.exports = class extends DAO {
     }
   }
 
+  async getDeviceState(deviceId) {
+    const result = {
+      id : 1
+    }
+    const sql = 'select state from device where device_id=?';
+    const data = [deviceId]
+    const isSuccess = await this.run(sql, data, result)
+
+    return {
+      isSuccess,
+      result: result.dbResult
+    }
+  }
+
+  async getDeviceConnect(deviceId) {
+    const result = {
+      id : 1
+    }
+    const sql = 'select is_connect from device where device_id=?';
+    const data = [deviceId]
+    const isSuccess = await this.run(sql, data, result)
+
+    return {
+      isSuccess,
+      result: result.dbResult
+    }
+  }
+
   // 장치 추가 함수.
   // 성공시 true, 실패시 false로 리턴.
   async createDevice(deviceId, deviceName, memberId) {
@@ -67,18 +95,4 @@ module.exports = class extends DAO {
     }
   }
 
-  // 사용자 삭제 함수
-  // true, false로 반환.
-  async deleteMember(memberId) {
-    const result = {}
-    const sql = 'delete member where memberid=?';
-    const data = { memberId, memberPwd, memberName}
-    
-    const isSuccess = await this.run(sql, data, result)
-
-    return {
-      isSuccess,
-      result: result.dbResult
-    }
-  }
 }
