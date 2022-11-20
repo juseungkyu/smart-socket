@@ -1,12 +1,12 @@
 const router = require('express').Router()
-const controller = require('../../Controller/MemberController')
+const controller = require('../Controller/MemberController')
 
-const joinController = new controller.memberCreateController
-const loginController = new controller.memberLoginController
-const logoutController = new controller.memberLogoutController
+const memberCreateController = new controller.memberCreateController()
+const memberLoginController = new controller.memberLoginController()
+const memberLogoutController = new controller.memberLogoutController()
 
-router.get('/logout', logoutController.doGet)
-router.post('/login', loginController.doPost)
-router.post('/join', joinController.doPost)
+router.get('/logout', memberLogoutController.get)
+router.post('/login', memberLoginController.post)
+router.post('/join', memberCreateController.post)
 
 module.exports = router

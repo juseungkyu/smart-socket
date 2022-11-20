@@ -8,6 +8,6 @@ router.use((req, res) => {
 })
 
 router.use('/device', deviceRouter)
-// router.use('/member', memberRouter)
+router.use('/member', memberRouter)
 
 module.exports = router

@@ -8,7 +8,7 @@ module.exports = class MemberLogoutController extends Controller {
     constructor() {
         super();
         
-        this.MemberDAO = new this.MemberDAO()
+        this.MemberDAO = new MemberDAO()
     }
 
     get = async (req, res) => {

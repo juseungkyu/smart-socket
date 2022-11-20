@@ -12,7 +12,7 @@ console.log("DB_PASS:", process.env.PASSWORD);
 
 async function start() {
     const returnData = await new MemberDAO().getMember('hi')
-    const {isSuccess, result} = returnData
+    const { isSuccess, result } = returnData
 
     console.log(result[0])
     console.log(result[0].member_id)
@@ -20,22 +20,26 @@ async function start() {
 
 start()
 
-app.listen(3001, ()=>{
+app.listen(3001, () => {
     console.log('server running')
 })
 
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: true
+}))
 app.use('/api', apiRouter)
 
 // 리엑트 앱 연결
-const reactPath = path.join(__dirname, 'react-app/build/index.html') 
+const reactPath = path.join(__dirname, 'react-app/build/index.html')
 console.log(reactPath)
 app.use(express.static(path.join(__dirname, 'react-app/build/')))
 
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     res.render('index', { data: req.db_result });
     res.sendFile(reactPath)
 })
 
-app.get('*', (req, res)=> {
+app.get('*', (req, res) => {
     res.sendFile(reactPath)
 })
