@@ -1,4 +1,4 @@
-export class Member {
+module.exports = class Member {
     constructor({
         member_id,
         member_name,

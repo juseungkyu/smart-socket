@@ -1,12 +1,13 @@
 const router = require('express').Router()
-const apiRouter = require('./api')
 
-router.use((req, res, next) => {
+const deviceRouter = require('./device')
+const memberRouter = require('./member')
+
+router.use((req, res) => {
     res.contentType('application/json')
-
-    next()
 })
 
-router.use('/api', apiRouter)
+router.use('/device', deviceRouter)
+// router.use('/member', memberRouter)
 
 module.exports = router
