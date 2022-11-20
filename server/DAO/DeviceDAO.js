@@ -20,7 +20,7 @@ module.exports = class extends DAO {
     }
   }
 
-  // 사용자 추가함수
+  // 장치 추가 함수.
   // 성공시 true, 실패시 false로 리턴.
   async createDevice(deviceId, deviceName, memberId) {
     const result = {}
@@ -35,13 +35,13 @@ module.exports = class extends DAO {
     }
   }
 
-  //사용자 비밀번호 변경함수
+  //장치 상태 변경함수
   // true, false로 반환.
-  async modifyMemberPassword(memberId, memberPwd) {
+  async changeDeviceState(deviceId, state) {
 
     const result = {}
-    const sql = 'update member set memberpwd=? where memberid=?';
-    const data = [memberId,memberPwd]
+    const sql = 'update device set state=? where device_id=?';
+    const data = [deviceId,state]
     
     const isSuccess = await this.run(sql, data, result)
 
