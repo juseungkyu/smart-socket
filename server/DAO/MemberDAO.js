@@ -20,6 +20,23 @@ module.exports = class extends DAO {
     }
   }
 
+  //사용자 가져오는 함수
+  async loginMember(memberId, memberPwd) {
+    const result = {
+      id : 1
+    }
+    const sql = 'select * from member where member_id=? AND member_pwd=?';
+    const data = [memberId, memberPwd]
+    const isSuccess = await this.run(sql, data, result)
+
+    return {
+      isSuccess,
+      result: result.dbResult
+    }
+
+
+  }
+
   // 사용자 추가함수
   // 성공시 true, 실패시 false로 리턴.
   async createMember(memberId, memberPwd, memberName) {
