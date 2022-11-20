@@ -18,12 +18,13 @@ module.exports = class MemberLogoutController extends Controller {
             return
         }
 
-        const info = await this.MemberDAO.MemberCreateController(userId, userPwd)
+        //임시
+        const info = true
 
         if (info) {
-            this.sendSuccess(200, info, res)
+            this.sendResponse(true, 200, {message:'로그아웃 성공'}, res);
         } else {
-            this.sendFailure(404, 'not found', res)
+            this.sendResponse(false, 404, {message:'로그아웃 실패'}, res)
         }
     }
     
