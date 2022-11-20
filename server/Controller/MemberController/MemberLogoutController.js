@@ -14,7 +14,7 @@ module.exports = class MemberLogoutController extends Controller {
     get = async (req, res) => {
         const { userId, userPwd } = req.query
         if (!userId || !userPwd) {
-            this.sendFailure(400, 'bad request', res)
+            this.sendResponse(false, 400, {message:'bad request'}, res);
             return
         }
 

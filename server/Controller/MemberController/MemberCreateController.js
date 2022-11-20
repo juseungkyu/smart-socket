@@ -18,9 +18,9 @@ module.exports = class MemberCreateController extends Controller {
         const info = await this.MemberDAO.createMember(memberId, memberPw)
 
         if (info) {
-            this.sendSuccess(200, info, res)
+            this.sendResponse(true, 200, info, res)
         } else {
-            this.sendFailure(404, 'not found', res)
+            this.sendResponse(false, 404, {message:'멤버 생성 실패'}, res)
         }
     }
     

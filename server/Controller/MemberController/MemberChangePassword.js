@@ -13,7 +13,7 @@ module.exports = class MemberChangeController extends Controller {
     get = async (req, res) => {
         const { memberId, memberPwd, newMemberPwd } = req.query
         if (!userId || !userPwd || memberPwd!=newUserPwd) {
-            this.sendResponse(false, 400, 'bad request', res)
+            this.sendResponse(false, 400, {message:'bad request'}, res)
             return
         }
 
@@ -22,8 +22,7 @@ module.exports = class MemberChangeController extends Controller {
         if (info) {
             this.sendResponse(true, 200, info, res)
         } else {
-            this.sendFailure(404, 'not found', res)
-            this.sendResponse(false, 404, 'not found', res)
+            this.sendResponse(false, 404, {message:'비밀번호 변경 실패'}, res)
         }
     }
 
