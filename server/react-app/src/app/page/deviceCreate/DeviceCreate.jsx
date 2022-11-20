@@ -28,7 +28,8 @@ function DeviceCreate(props) {
                     inputs={inputs}
                     action={action}
                     method={method}
-                >기기 등록하기</Form>
+                    title="기기 등록하기"
+                ></Form>
             </div>
         </section>
     );

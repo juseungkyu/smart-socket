@@ -18,11 +18,11 @@ import Btn from '../btn/Btn';
  * @returns 
  */
 function Form(props) {
-    const { inputs, action, method, children } = props;
+    const { title, inputs, action, method, children } = props;
 
     return(
         <form className='form gap-3' action={action} method={method}>
-            <h3>{children}</h3>
+            <h3>{title}</h3>
             {
                 inputs.map((inputData)=>{
                     const {label, type, name, value, readonly} = inputData
@@ -39,6 +39,7 @@ function Form(props) {
                     )
                 })
             }
+            {children}
             <div className='w-100 d-flex justify-end mt-3'>
                 <Btn>전송</Btn>
             </div>

@@ -28,7 +28,8 @@ function Login(props) {
                     inputs={inputs}
                     action={action}
                     method={method}
-                >로그인</Form>
+                    title="로그인"
+                ></Form>
             </div>
         </section>
     );

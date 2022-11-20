@@ -28,7 +28,8 @@ function Join(props) {
                     inputs={inputs}
                     action={action}
                     method={method}
-                >회원가입</Form>
+                    title="회원가입"
+                ></Form>
             </div>
         </section>
     );

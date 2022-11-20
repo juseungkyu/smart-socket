@@ -19,12 +19,20 @@ function Input(props) {
         setInputValue(e.target.value);
     };
 
-    return (
-        <div className='input-dom'>
-            <p>{label}</p>
-            <input onChange={handleChange} type={type} value={inputValue} name={name} readOnly={readonly} />
-        </div>
-    )
+    let input = null
+
+    if(type == 'hidden'){
+        input = <input onChange={handleChange} type={type} value={inputValue} name={name} readOnly={readonly} />
+    } else {
+        input = (
+            <div className='input-dom'>
+                <p>{label}</p>
+                <input onChange={handleChange} type={type} value={inputValue} name={name} readOnly={readonly} />
+            </div>
+        )
+    }
+
+    return input
 }
 
 export default Input;
