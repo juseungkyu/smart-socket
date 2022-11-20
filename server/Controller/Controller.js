@@ -4,9 +4,9 @@ module.exports = class Controller {
   sendResponse(success, code, obj, res) {
     res.status(code)
 
-    res.json(JSON.stringify({
+    res.json({
       success,
       data: obj
-    }))
+    })
   }
 }

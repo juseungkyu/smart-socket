@@ -12,8 +12,11 @@ module.exports = class GetDeviceController extends Controller {
         this.deviceDAO = new DeviceDAO()
     }
 
-    get = async (req, res)=>{
+    get = (req, res)=>{
+        console.log('hello')
         console.log(req.params)
+
+        this.sendResponse(true, 200, {message:req.params}, res);
     }
     
 }
