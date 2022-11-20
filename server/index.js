@@ -3,7 +3,7 @@ dotenv.config();
 const express = require('express')
 const app = express()
 const path = require('path')
-const dbConn = require('./db/dbConn')
+const dbConn = require('./DB/dbConn')
 const MemberDAO = require('./DAO/MemberDAO')
 
 console.log("DB_HOST:", process.env.HOST);
