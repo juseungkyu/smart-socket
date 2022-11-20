@@ -11,8 +11,8 @@ module.exports = class MemberChangeController extends Controller {
     }
 
     get = async (req, res) => {
-        const { userId, userPwd } = req.query
-        if (!userId || !userPwd) {
+        const { userId, userPwd, newUserPwd } = req.query
+        if (!userId || !userPwd || userPwd!=newUserPwd) {
             this.sendFailure(400, 'bad request', res)
             return
         }
