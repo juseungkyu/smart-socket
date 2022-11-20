@@ -14,13 +14,13 @@ module.exports = class MemberCreateController extends Controller {
     }
 
     get = async (req, res) => {
-        const { userId, userPwd } = req.query
-        if (!userId || !userPwd) {
+        const { userId, userPwd, memberName } = req.query
+        if (!userId || !userPwd || !memberName) {
             this.sendFailure(400, 'bad request', res)
             return
         }
 
-        const info = await this.MemberDAO.MemberCreateController(userId, userPwd)
+        const info = await this.MemberDAO.createMember(userId, userPwd, memberName)
 
         if (info) {
             this.sendSuccess(200, info, res)

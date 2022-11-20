@@ -18,7 +18,7 @@ module.exports = class MemberLoginController extends Controller {
             return
         }
 
-        const info = await this.MemberDAO.MemberCreateController(userId, userPwd)
+        const info = await this.MemberDAO.loginMember(userId, userPwd)
 
         if (info) {
             this.sendSuccess(200, info, res)
