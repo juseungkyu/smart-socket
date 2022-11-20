@@ -12,7 +12,7 @@ module.exports = class UpdateStateController extends Controller {
         this.deviceDAO = new DeviceDAO()
     }
 
-    get = async (req, res)=>{
+    post = async (req, res)=>{
         console.log(req.params)
     }
     

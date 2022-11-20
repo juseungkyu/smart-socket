@@ -7,10 +7,10 @@ const updateStateController = new controller.updateStateController()
 const getDeviceController = new controller.getDeviceController()
 const getAllDeviceController = new controller.getDeviceController()
 
-router.get('/:deviceId', getDeviceController.doGet)
-router.get('/:deviceId/all', getAllDeviceController.doGet)
-router.get('/heartbeat/:deviceId', heartbeatController.doGet)
-router.post('/create', createController.doPost)
-router.post('/update-state/:state', updateStateController.doPost)
+router.get('/:deviceId', getDeviceController.get)
+router.get('/:deviceId/all', getAllDeviceController.get)
+router.get('/heartbeat/:deviceId', heartbeatController.get)
+router.post('/create', createController.post)
+router.post('/update-state/:state', updateStateController.post)
 
 module.exports = router
