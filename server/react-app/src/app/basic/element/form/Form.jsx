@@ -25,12 +25,12 @@ function Form(props) {
     const { title, inputs, action, method, children, successUrl } = props;
 
     const valueMap = {}
-    const inputDoms = inputs.map((inputData)=>{
-        const {label, type, name, value, readonly} = inputData
-        
+    const inputDoms = inputs.map((inputData) => {
+        const { label, type, name, value, readonly } = inputData
+
         valueMap[name] = value
 
-        const onChange = (e)=>{
+        const onChange = (e) => {
             valueMap[name] = e.target.value
         }
 
@@ -48,34 +48,36 @@ function Form(props) {
     })
 
     let isProcessing = false
-    const onSubmit = async ()=>{
-        if(isProcessing){
+    const onSubmit = async () => {
+        if (isProcessing) {
             return
         }
         isProcessing = true
 
         const valueKeys = Object.keys(valueMap)
         const data = {}
-        valueKeys.forEach(x=>{
+        valueKeys.forEach(x => {
             data[x] = valueMap[x]
         })
 
-        const config = {"Content-Type": 'application/json'};
-        
-        try{
+        const config = { "Content-Type": 'application/json' };
+
+        try {
             const response = await axios[method](action, data, config);
-            alert('성공')
-            hisotry.push(`/${successUrl}`);
             console.log(response);
-        } catch(error){
+            console.log(successUrl)
+            hisotry.push(`${successUrl}`);
+        } catch (error) {
             console.error(error);
             alert('실패')
+            return
         }
 
+        alert('성공')
         isProcessing = false
     }
 
-    return(
+    return (
         <div className='form gap-3' action={action} method={method}>
             <h3>{title}</h3>
             {inputDoms}
@@ -90,3 +92,10 @@ function Form(props) {
 }
 
 export default Form;
+
+
+
+
+
+
+
