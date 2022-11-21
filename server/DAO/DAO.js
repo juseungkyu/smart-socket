@@ -1,4 +1,4 @@
-const dbConn = require('../DB/dbConn');
+const dbConn = require('../db/dbConn');
 
 module.exports = class DAO {
     async run(sql, data, result) {

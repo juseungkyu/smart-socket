@@ -42,7 +42,10 @@ module.exports = class extends DAO {
   async createMember(memberId, memberPwd) {
     const result = {}
     const sql = 'insert into member set ?';
-    const data = { memberId, memberPwd}
+    const data = { 
+      member_id: memberId, 
+      member_pw: memberPwd
+    }
     
     const isSuccess = await this.run(sql, data, result)
 
