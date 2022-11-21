@@ -2,6 +2,8 @@ const Controller = require('../Controller');
 const MemberDAO = require('../../DAO/MemberDAO');
 const MemberVO = require('../../VO/Member');
 
+
+
 module.exports = class MemberCreateController extends Controller {
     constructor() {
         super();

@@ -12,7 +12,7 @@ module.exports = class GetDeviceController extends Controller {
         this.deviceDAO = new DeviceDAO()
     }
 
-    get = (req, res)=>{
+    get  = async(req, res)=>{
         const {deviceId} = req.params
 
         if(!deviceId) {

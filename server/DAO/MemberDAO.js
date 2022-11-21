@@ -28,7 +28,7 @@ module.exports = class extends DAO {
     const sql = 'select * from member where member_id=? AND member_pwd=?';
     const data = [memberId, memberPwd]
     const isSuccess = await this.run(sql, data, result)
-
+    console.log(result.dbResult)
     return {
       isSuccess,
       result: result.dbResult

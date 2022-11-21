@@ -4,6 +4,8 @@ const MemberDAO = require('../../DAO/MemberDAO');
 
 const MemberVO = require('../../VO/Member');
 
+
+
 module.exports = class MemberChangeController extends Controller {
     constructor() {
         super();
