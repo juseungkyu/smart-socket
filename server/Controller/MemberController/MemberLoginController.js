@@ -23,13 +23,13 @@ module.exports = class MemberLoginController extends Controller {
 
         if (result.code == 0) {
             // 로그인 성공시 쿠키 생성
-            res.cookie('memberid', result.userid, {
+            res.cookie('member_id', result.member_id, {
                 maxAge: 60 * 60 * 1000,
                 path: "/"
             });
 
             
-            req.session.user = result.userid;
+            req.session.member_id = result.member_id;
         }
 
 

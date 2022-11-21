@@ -18,13 +18,12 @@ console.log("DB_PASS:", process.env.PASSWORD);
 async function start() {
     const returnData = await new MemberDAO().getMember('hi')
     const { isSuccess, result } = returnData
+    console.log(result)
 
-    console.log(result[0])
-    console.log(result[0].member_id)
 }
 
 app.use(session({
-    secert:'abcd1234',
+    secret:process.env.SESSION_SECRET,
     resave:false,
     saveUninitialized:true,
     store:new MemoryStore({checkPeriod:maxAge}),
