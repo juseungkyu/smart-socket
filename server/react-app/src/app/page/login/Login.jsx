@@ -20,7 +20,7 @@ function Login(props) {
     ]
 
     const action = "/api/member/login"
-    const method = "POST"
+    const method = "post"
     return (
         <section>
             <div className="login container d-flex justify-center align-center">
@@ -28,6 +28,7 @@ function Login(props) {
                     inputs={inputs}
                     action={action}
                     method={method}
+                    successUrl='/'
                     title="로그인"
                 ></Form>
             </div>

@@ -20,7 +20,7 @@ function Join(props) {
     ]
 
     const action = "/api/member/join"
-    const method = "POST"
+    const method = "get"
     return (
         <section>
             <div className="join container d-flex justify-center align-center">
@@ -28,6 +28,7 @@ function Join(props) {
                     inputs={inputs}
                     action={action}
                     method={method}
+                    successUrl='/'
                     title="회원가입"
                 ></Form>
             </div>
