@@ -13,7 +13,21 @@ module.exports = class UpdateStateController extends Controller {
     }
 
     post = async (req, res)=>{
-        console.log(req.params)
+        const {deviceId} = req.params
+
+        if(!deviceId) {
+            this.sendResponse(false, 400, {message:'bad request'}, res);
+            return
+        }
+
+        const time = Date.now()
+        const info = await this.deviceDAO.deviceConnect(deviceId, time);
+
+        if (info.isSuccess) {
+            this.sendResponse(true, 200, info.result, res);
+        } else {
+            this.sendResponse(false, 400, {message:'서버 연결 실패'}, res)
+        }
     }
     
 }

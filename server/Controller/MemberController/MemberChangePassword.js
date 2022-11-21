@@ -7,7 +7,7 @@ const MemberVO = require('../../VO/Member');
 module.exports = class MemberChangeController extends Controller {
     constructor() {
         super();
-        this.MemberDAO = new MemberDAO()
+        this.memberDAO = new MemberDAO()
     }
 
     get = async (req, res) => {
@@ -17,7 +17,7 @@ module.exports = class MemberChangeController extends Controller {
             return
         }
 
-        const info = await this.MemberDAO.modifyMemberPassword(userId, userPwd)
+        const info = await this.memberDAO.modifyMemberPassword(userId, userPwd)
 
         if (info) {
             this.sendResponse(true, 200, {message:'비밀번호 변경 성공'}, res);
