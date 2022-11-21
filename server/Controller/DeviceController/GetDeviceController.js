@@ -13,10 +13,20 @@ module.exports = class GetDeviceController extends Controller {
     }
 
     get = (req, res)=>{
-        console.log('hello')
-        console.log(req.params)
+        const {deviceId} = req.params
 
-        this.sendResponse(true, 200, {message:req.params}, res);
+        if(!deviceId) {
+            this.sendResponse(false, 400, {message:'bad request'}, res);
+            return
+        }
+
+        const info = await this.deviceDAO.getAllDevice(memberId);
+
+        if (info.isSuccess) {
+            this.sendResponse(true, 200, info.result, res);
+        } else {
+            this.sendResponse(false, 404, {message:'디바이스 조회 실패'}, res)
+        }
     }
     
 }

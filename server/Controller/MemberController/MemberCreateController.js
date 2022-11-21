@@ -5,7 +5,7 @@ const MemberVO = require('../../VO/Member');
 module.exports = class MemberCreateController extends Controller {
     constructor() {
         super();
-        this.MemberDAO = new MemberDAO()
+        this.memberDAO = new MemberDAO()
     }
 
     post = async (req, res) => {
@@ -15,9 +15,9 @@ module.exports = class MemberCreateController extends Controller {
             return
         }
 
-        const info = await this.MemberDAO.createMember(memberId, memberPw)
+        const {info, isSuccess} = await this.memberDAO.createMember(memberId, memberPw)
 
-        if (info) {
+        if (isSuccess) {
             this.sendResponse(true, 200, {message:'멤버 생성 성공'}, res);
         } else {
             this.sendResponse(false, 404, {message:'멤버 생성 실패'}, res)

@@ -8,7 +8,7 @@ module.exports = class MemberLoginController extends Controller {
     constructor() {
         super();
         
-        this.MemberDAO = new MemberDAO()
+        this.memberDAO = new MemberDAO()
     }
 
     post = async (req, res) => {
@@ -18,7 +18,7 @@ module.exports = class MemberLoginController extends Controller {
             return
         }
 
-        const {isSuccess} = await this.MemberDAO.loginMember(memberId, memberPw)
+        const {result, isSuccess} = await this.memberDAO.loginMember(memberId, memberPw)
 
         if (isSuccess) {
             this.sendResponse(true, 200, {message:'로그인 성공'}, res);
