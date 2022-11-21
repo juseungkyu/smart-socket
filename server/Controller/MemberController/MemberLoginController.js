@@ -21,7 +21,7 @@ module.exports = class MemberLoginController extends Controller {
 
         const { result, isSuccess } = await this.memberDAO.loginMember(memberId, memberPw)
 
-        if (result.code == 0) {
+        if (isSuccess) {
             // 로그인 성공시 쿠키 생성
             res.cookie('member_id', result.member_id, {
                 maxAge: 60 * 60 * 1000,
@@ -30,11 +30,7 @@ module.exports = class MemberLoginController extends Controller {
 
             
             req.session.member_id = result.member_id;
-        }
 
-
-
-        if (isSuccess) {
             this.sendResponse(true, 200, { message: '로그인 성공' }, res);
         } else {
             this.sendResponse(false, 404, { message: '유저 정보 확인 실패' }, res);
