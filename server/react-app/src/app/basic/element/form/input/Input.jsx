@@ -11,7 +11,12 @@ import React, { useState } from 'react';
  * @returns Form
  */
 function Input(props) {
-    const { label, type, name, value, readonly } = props;
+    const { label, type, name, value, readonly} = props;
+    let { onChange } = props;
+
+    if(!onChange){
+        onChange = ()=>{}
+    }
 
     const [inputValue, setInputValue] = useState(value);
 
@@ -27,7 +32,7 @@ function Input(props) {
         input = (
             <div className='input-dom'>
                 <p>{label}</p>
-                <input onChange={handleChange} type={type} value={inputValue} name={name} readOnly={readonly} />
+                <input onChange={(e)=>{handleChange(e); onChange(e);}} type={type} value={inputValue} name={name} readOnly={readonly} />
             </div>
         )
     }
