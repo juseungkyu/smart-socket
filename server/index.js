@@ -5,6 +5,11 @@ const app = express()
 const path = require('path')
 const MemberDAO = require('./DAO/MemberDAO')
 const apiRouter = require('./routers')
+const session = require('express-session');
+const cookieParser = require('cookie-parser')
+const { MemoryStore } = require("express-session");
+
+let maxAge = 5*60*1000
 
 console.log("DB_HOST:", process.env.HOST);
 console.log("DB_USER:", process.env.USER);
@@ -17,6 +22,19 @@ async function start() {
     console.log(result[0])
     console.log(result[0].member_id)
 }
+
+app.use(session({
+    secert:'abcd1234',
+    resave:false,
+    saveUninitialized:true,
+    store:new MemoryStore({checkPeriod:maxAge}),
+    cookie:{
+        maxAge:maxAge
+    }
+}))
+
+app.use(cookieParser())
+
 
 start()
 
