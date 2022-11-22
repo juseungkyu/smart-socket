@@ -17,7 +17,7 @@ module.exports = class CreateController extends Controller {
         const memberId = req.session.member_id
 
         if (!memberId || !deviceId || !deviceName) {
-            this.sendResponse(false, 400, {message:'bad request'}, res);
+            this.sendResponse(false, 400, {message:'세션이 없거나 입력값이 잘못 되었습니다.'}, res);
             return
         }
 

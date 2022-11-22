@@ -20,10 +20,10 @@ module.exports = class GetDeviceController extends Controller {
             return
         }
 
-        const info = await this.deviceDAO.getAllDevice(memberId);
+        const info = await this.deviceDAO.getDevice(deviceId);
 
         if (info.isSuccess) {
-            this.sendResponse(true, 200, info.result, res);
+            this.sendResponse(true, 200, info.result[0], res);
         } else {
             this.sendResponse(false, 404, {message:'디바이스 조회 실패'}, res)
         }

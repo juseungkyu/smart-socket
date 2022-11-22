@@ -1,22 +1,27 @@
 import './deviceList.css'
 import Device from '../../basic/element/device/Device'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function DeviceList(props) {
     const [deviceList, setDeviceList] = useState([])
-    createPage(setDeviceList)
-    
+
+    useEffect(() => {
+        isProcessed = false
+        createPage(setDeviceList)
+        return () => {};
+    }, []);
+
     return (
         <section>
             <div className="deviceList gap-3 container">
                 {
-                    deviceList.map((device)=>{
-                        const {deviceId, deviceName, state, isConnect} = device
+                    deviceList.map((device) => {
+                        const { deviceId, deviceName, state, isConnect } = device
 
                         console.log(deviceId, state, isConnect)
 
-                        return (<Device 
+                        return (<Device
                             key={deviceId}
                             deviceId={deviceId}
                             deviceName={deviceName}
@@ -25,7 +30,7 @@ function DeviceList(props) {
                         />)
                     })
                 }
-                
+
             </div>
         </section>
     );
@@ -37,21 +42,38 @@ const createPage = async (setDeviceList) => {
         return
     }
     isProcessed = true
-    
+
+    console.log(isProcessed)
+
+    let deviceList = []
     const config = { "Content-Type": 'application/json' };
     try {
         const response = await axios.get(`/api/device/all`, config);
         console.log('hi')
-        console.log(response.data);
+        deviceList = response.data.data;
     } catch (error) {
         console.error(error);
         alert(error.response.data.data.message)
         return
     }
-    
-    const deviceList = [
 
-    ]
+    deviceList = deviceList.map((device)=>{
+        const {
+            device_id,
+            device_name,
+            member_id,
+            is_connect,
+            state
+        } = device
+
+        return {
+            deviceId: device_id,
+            deviceName: device_name,
+            memberId: member_id,
+            isConnect: is_connect,
+            state
+        }
+    })
 
     console.log(deviceList)
     setDeviceList(deviceList)
