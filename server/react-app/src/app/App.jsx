@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './basic.css'
@@ -15,25 +15,33 @@ import DeviceView from './page/deviceView/DeviceView';
 import Login from './page/login/Login';
 import Join from './page/join/Join';
 
+import MemberContext from '../context/MemberContext';
+import Cookies from 'js-cookie';
+
 function App(props) {
+	// const [memberId, setMemberId] = useState(Cookies.get('member_id'))
+	const [memberId, setMemberId] = useState(111)
+
 	return (
 		<div className='App'>
-			<BrowserRouter>
-				<Header />
-				<Routes>
-					<Route path="/" element={<Main />}></Route>
+			<MemberContext.Provider value={{memberId, setMemberId}}>
+				<BrowserRouter>
+					<Header />
+					<Routes>
+						<Route path="/" element={<Main />}></Route>
 
-					<Route path="/device/create" element={<DeviceCreate />}></Route>
-					<Route path="/device/list" element={<DeviceList />}></Route>
-					<Route path="/device/:deviceId" element={<DeviceView />}></Route>
+						<Route path="/device/create" element={<DeviceCreate />}></Route>
+						<Route path="/device/list" element={<DeviceList />}></Route>
+						<Route path="/device/:deviceId" element={<DeviceView />}></Route>
 
-					<Route path="/login" element={<Login />}></Route>
-					<Route path="/join" element={<Join />}></Route>
+						<Route path="/login" element={<Login />}></Route>
+						<Route path="/join" element={<Join />}></Route>
 
-					<Route path="*" element={<NotFound />}></Route>
-				</Routes>
-				<Footer/>
-			</BrowserRouter>
+						<Route path="*" element={<NotFound />}></Route>
+					</Routes>
+					<Footer/>
+				</BrowserRouter>
+			</MemberContext.Provider>
 		</div>
 	);
 };
