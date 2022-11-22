@@ -38,7 +38,6 @@ function Join(props) {
 }
 
 function onJoin(res) {
-    
     alert('회원가입 성공')
 }
 

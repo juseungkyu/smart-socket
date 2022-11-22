@@ -20,7 +20,8 @@ function DeviceCreate(props) {
     ]
 
     const action = "/api/device/create"
-    const method = "POST"
+    const method = "post"
+
     return (
         <section>
             <div className="deviceCreate container d-flex justify-center align-center">
@@ -28,11 +29,17 @@ function DeviceCreate(props) {
                     inputs={inputs}
                     action={action}
                     method={method}
+                    callBack={onCreate}
+                    successUrl='/'
                     title="기기 등록하기"
                 ></Form>
             </div>
         </section>
     );
+}
+
+function onCreate(res) {
+    alert('등록 되었습니다.')
 }
 
 export default DeviceCreate;

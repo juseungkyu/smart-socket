@@ -21,12 +21,12 @@ module.exports = class MemberLoginController extends Controller {
 
         if (isSuccess) {
             // 로그인 성공시 쿠키 생성
-            res.cookie('member_id', result.member_id, {
+            res.cookie('member_id', result[0].member_id, {
                 maxAge: 60 * 60 * 1000,
                 path: "/"
             });
             
-            req.session.member_id = result.member_id;
+            req.session.member_id = result[0].member_id;
 
             this.sendResponse(true, 200, { message: '로그인 성공' }, res);
         } else {

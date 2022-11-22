@@ -18,5 +18,6 @@
     "mysql": "^2.18.1",
     "oracledb": "^5.5.0",
     "promise-mysql": "^5.2.0"
-  }
+  },
+  "build": "GENERATE_SOURCEMAP=false react-scripts build"
 }

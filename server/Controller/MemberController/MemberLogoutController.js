@@ -12,20 +12,14 @@ module.exports = class MemberLogoutController extends Controller {
     }
 
     get = async (req, res) => {
-        const { userId, userPwd } = req.query
-        if (!userId || !userPwd) {
-            this.sendResponse(false, 400, {message:'bad request'}, res);
-            return
-        }
-
         //임시
         let info = false;
         
         try {
             res.clearCookie('member_id');
-            req.session.destroy(function(){
+            req.session.destroy(function(err){
+                if(err) throw err;
                 req.session;
-                
             }); 
             info = true;
           } catch (error) {

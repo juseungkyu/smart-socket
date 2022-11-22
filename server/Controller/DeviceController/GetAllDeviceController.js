@@ -14,6 +14,7 @@ module.exports = class GetAllDeviceController extends Controller {
 
     get = async (req, res)=>{
         const memberId = req.session.member_id
+        console.log(memberId)
 
         if(!memberId) {
             this.sendResponse(false, 400, {message:'세션이 확인되지 않습니다.'}, res);
