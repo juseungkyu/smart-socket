@@ -7,9 +7,7 @@ module.exports = class extends DAO {
 
   //사용자 가져오는 함수
   async getDevice(deviceId) {
-    const result = {
-      id : 1
-    }
+    const result = {}
     const sql = 'select * from device where device_id=?';
     const data = [deviceId]
     const isSuccess = await this.run(sql, data, result)
