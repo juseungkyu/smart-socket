@@ -1,10 +1,8 @@
 import './form.css'
 import Input from './input/Input';
 import Btn from '../btn/Btn';
-import { createBrowserHistory } from 'history'
 import axios from 'axios';
-
-const hisotry = createBrowserHistory()
+import { useNavigate } from "react-router-dom";
 
 /**
  * 
@@ -23,6 +21,7 @@ const hisotry = createBrowserHistory()
  * @returns 
  */
 function Form(props) {
+    const navigate = useNavigate();
     const { title, inputs, action, method, children, successUrl, callBack } = props;
 
     const valueMap = {}
@@ -67,11 +66,12 @@ function Form(props) {
             const response = await axios[method](action, data, config);
             console.log(response);
             console.log(successUrl)
-            hisotry.push(`${successUrl}`);
+            navigate(`${successUrl}`);
+            console.log(callBack)
             callBack(response)
         } catch (error) {
             console.error(error);
-            alert('실패')
+            alert(error.response.data.data.message)
             isProcessing = false
             return
         }

@@ -28,12 +28,18 @@ function Join(props) {
                     inputs={inputs}
                     action={action}
                     method={method}
-                    successUrl='/'
+                    callBack={onJoin}
+                    successUrl='/login'
                     title="회원가입"
                 ></Form>
             </div>
         </section>
     );
+}
+
+function onJoin(res) {
+    
+    alert('회원가입 성공')
 }
 
 export default Join;

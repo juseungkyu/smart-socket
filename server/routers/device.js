@@ -5,7 +5,7 @@ const heartbeatController = new controller.heartbeatController()
 const createController = new controller.createController()
 const updateStateController = new controller.updateStateController()
 const getDeviceController = new controller.getDeviceController()
-const getAllDeviceController = new controller.getDeviceController()
+const getAllDeviceController = new controller.getAllDeviceController()
 
 router.get('/all', getAllDeviceController.get)
 router.get('/:deviceId', getDeviceController.get)

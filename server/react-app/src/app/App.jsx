@@ -25,7 +25,7 @@ function App(props) {
 	return (
 		<div className='App'>
 			<MemberContext.Provider value={{memberId, setMemberId}}>
-				<BrowserRouter>
+				<BrowserRouter >
 					<Header />
 					<Routes>
 						<Route path="/" element={<Main />}></Route>

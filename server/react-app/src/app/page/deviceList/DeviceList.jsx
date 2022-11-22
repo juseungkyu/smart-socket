@@ -1,7 +1,6 @@
 import './deviceList.css'
 import Device from '../../basic/element/device/Device'
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function DeviceList(props) {
@@ -42,11 +41,11 @@ const createPage = async (setDeviceList) => {
     const config = { "Content-Type": 'application/json' };
     try {
         const response = await axios.get(`/api/device/all`, config);
-        console.log(response);
+        console.log('hi')
+        console.log(response.data);
     } catch (error) {
         console.error(error);
-        alert('불러오기 실패')
-        isProcessing = false
+        alert(error.response.data.data.message)
         return
     }
     

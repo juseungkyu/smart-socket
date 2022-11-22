@@ -1,7 +1,5 @@
 const Controller = require('../Controller');
-
 const MemberDAO = require('../../DAO/MemberDAO');
-
 const MemberVO = require('../../VO/Member');
 
 
@@ -27,7 +25,6 @@ module.exports = class MemberLoginController extends Controller {
                 maxAge: 60 * 60 * 1000,
                 path: "/"
             });
-
             
             req.session.member_id = result.member_id;
 

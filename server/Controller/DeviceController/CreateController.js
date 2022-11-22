@@ -20,7 +20,7 @@ module.exports = class CreateController extends Controller {
             return
         }
 
-        const info = await this.deviceDAO.applicationDevice(memberId, memberPw)
+        const info = await this.deviceDAO.applicationDevice(deviceId, memberId)
         
         if (info.isSuccess) {
             this.sendResponse(true, 200, {message:'디바이스 생성 성공'}, res);

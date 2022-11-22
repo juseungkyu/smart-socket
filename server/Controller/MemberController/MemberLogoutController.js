@@ -36,8 +36,6 @@ module.exports = class MemberLogoutController extends Controller {
         } else {
             this.sendResponse(false, 404, {message:'로그아웃 실패'}, res)
         }
-
-        
     }
     
     

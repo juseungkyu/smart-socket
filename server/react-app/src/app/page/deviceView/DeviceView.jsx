@@ -22,23 +22,6 @@ const createPage = async (setPage, deviceId) => {
         return
     }
     isProcessed = true
-    
-    const inputs = [
-        {
-            "label": 'name',
-            "type": 'text',
-            "name": 'memberId',
-            "value": deviceName,
-            "readonly": false 
-        },
-        {
-            "label": '',
-            "type": 'hidden',
-            "name": 'deviceId',
-            "value": deviceId,
-            "readonly": false 
-        },
-    ]
 
     const action = 'api/device/update'
     const method = 'POST'
@@ -50,30 +33,46 @@ const createPage = async (setPage, deviceId) => {
     } catch (error) {
         console.error(error);
         alert('불러오기 실패')
-        isProcessing = false
         return
     }
     
-    const page = (
-        <section>
-            <div className="deviceView gap-3 container d-flex flex-col align-center">
-                <Device 
-                    key={deviceId}
-                    deviceId={deviceId}
-                    deviceName={deviceName}
-                    isConnect={isConnect}
-                    state={state}
-                />
-                <Form
-                    inputs={inputs}
-                    action={action}
-                    method={method}
-                    title='수정'
-                >
-                    <StateRadio value={state}></StateRadio>
-                </Form>
-            </div>
-        </section>
+    // const inputs = [
+    //     {
+    //         "label": 'name',
+    //         "type": 'text',
+    //         "name": 'memberId',
+    //         "value": deviceName,
+    //         "readonly": false 
+    //     },
+    //     {
+    //         "label": '',
+    //         "type": 'hidden',
+    //         "name": 'deviceId',
+    //         "value": deviceId,
+    //         "readonly": false 
+    //     },
+    // ]
+    
+    const page = (<div></div>
+        // <section>
+        //     <div className="deviceView gap-3 container d-flex flex-col align-center">
+        //         <Device 
+        //             key={deviceId}
+        //             deviceId={deviceId}
+        //             deviceName={deviceName}
+        //             isConnect={isConnect}
+        //             state={state}
+        //         />
+        //         <Form
+        //             inputs={inputs}
+        //             action={action}
+        //             method={method}
+        //             title='수정'
+        //         >
+        //             <StateRadio value={state}></StateRadio>
+        //         </Form>
+        //     </div>
+        // </section>
     );
 
     console.log(page)
