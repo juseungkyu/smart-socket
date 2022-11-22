@@ -20,7 +20,7 @@ function Join(props) {
     ]
 
     const action = "/api/member/join"
-    const method = "get"
+    const method = "post"
     return (
         <section>
             <div className="join container d-flex justify-center align-center">
