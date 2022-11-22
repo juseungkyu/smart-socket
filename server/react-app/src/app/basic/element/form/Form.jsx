@@ -70,6 +70,7 @@ function Form(props) {
         } catch (error) {
             console.error(error);
             alert('실패')
+            isProcessing = false
             return
         }
 

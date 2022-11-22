@@ -15,11 +15,10 @@ console.log("DB_HOST:", process.env.HOST);
 console.log("DB_USER:", process.env.USER);
 console.log("DB_PASS:", process.env.PASSWORD);
 
-async function start() {
+async function test() {
     const returnData = await new MemberDAO().getMember('hi')
     const { isSuccess, result } = returnData
     console.log(result)
-
 }
 
 app.use(session({
@@ -31,11 +30,9 @@ app.use(session({
         maxAge:maxAge
     }
 }))
+test()
 
 app.use(cookieParser())
-
-
-start()
 
 app.listen(3001, () => {
     console.log('server running')
