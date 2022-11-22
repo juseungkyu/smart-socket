@@ -26,7 +26,7 @@ module.exports = class CreateController extends Controller {
         if (info.isSuccess) {
             this.sendResponse(true, 200, {message:'디바이스 생성 성공'}, res);
         } else {
-            this.sendResponse(false, 400, {message:'디바이스 생성 실패'}, res)
+            this.sendResponse(false, 404, {message:'디바이스 생성 실패'}, res)
         }
     }
     
