@@ -12,13 +12,13 @@ module.exports = class MemberLogoutController extends Controller {
     }
 
     get = async (req, res) => {
-
         //임시
         let info = false;
         
         try {
             res.clearCookie('member_id');
-            req.session.destroy(function(){
+            req.session.destroy(function(err){
+                if(err) throw err;
                 req.session;
             }); 
             info = true;
