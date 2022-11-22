@@ -13,6 +13,7 @@ module.exports = class CreateController extends Controller {
     }
 
     post = async (req, res)=>{
+        console.log("요청 들어옴 1")
         const {deviceId, memberId} = req.body
 
         if (!memberId || !deviceId) {
