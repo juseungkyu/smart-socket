@@ -25,8 +25,9 @@ module.exports = class MemberLogoutController extends Controller {
             res.clearCookie('member_id');
             req.session.destroy(function(){
                 req.session;
-                info = true;
+                
             }); 
+            info = true;
           } catch (error) {
             console.log(error);
           }
