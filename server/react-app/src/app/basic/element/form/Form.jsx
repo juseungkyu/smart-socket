@@ -14,7 +14,8 @@ const hisotry = createBrowserHistory()
  *          "type": 'text, number'
  *          "name": ''
  *          "value": ''
- *          "readonly": '': 
+ *          "callBack": ''
+ *          "readonly": ''
  *      },
  *      "action" : url
  *      "method" : get or post or delete or put,
@@ -22,7 +23,7 @@ const hisotry = createBrowserHistory()
  * @returns 
  */
 function Form(props) {
-    const { title, inputs, action, method, children, successUrl } = props;
+    const { title, inputs, action, method, children, successUrl, callBack } = props;
 
     const valueMap = {}
     const inputDoms = inputs.map((inputData) => {
@@ -67,6 +68,7 @@ function Form(props) {
             console.log(response);
             console.log(successUrl)
             hisotry.push(`${successUrl}`);
+            callBack(response)
         } catch (error) {
             console.error(error);
             alert('실패')
@@ -74,7 +76,6 @@ function Form(props) {
             return
         }
 
-        alert('성공')
         isProcessing = false
     }
 

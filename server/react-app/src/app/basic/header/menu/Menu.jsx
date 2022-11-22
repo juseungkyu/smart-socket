@@ -3,8 +3,13 @@ import MenuElement from './MenuElement/MenuElement';
 
 import { useContext } from "react";
 import MemberContext from "../../../../context/MemberContext";
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { createBrowserHistory } from 'history'
 
 import './menu.css'
+
+const history = createBrowserHistory()
 
 function getMenu({memberId, setMemberId}) {
     const menuList = [
@@ -18,25 +23,23 @@ function getMenu({memberId, setMemberId}) {
     } else {
         let isProcessing = false
         const logoutClick = async ()=>{
-            console.log('logout')
-            setMemberId(undefined)
-            // if (isProcessing) {
-            //     return
-            // }
-            // isProcessing = true
+            if (isProcessing) {
+                return
+            }
+            isProcessing = true
 
-            // try {
-            //     const response = await axios.get('/api/member/logout');
-            //     console.log(response)
-            //     hisotry.push(`/`);
-            // } catch (error) {
-            //     alert('로그아웃 실패')
-            //     isProcessing = false
-            //     return
-            // }
+            try {
+                const response = await axios.get('/api/member/logout');
+                console.log(response)
+                history.push(`/`);
+            } catch (error) {
+                alert('로그아웃 실패')
+                isProcessing = false
+                return
+            }
 
-            // setMemberId(Cookies.get('member_id'))
-            // isProcessing = false
+            setMemberId(Cookies.get('member_id'))
+            isProcessing = false
         }
 
         menuList.push(<MenuElement name="로그아웃" onClick={logoutClick} />)

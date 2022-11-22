@@ -1,7 +1,12 @@
 import './login.css'
 import Form from '../../basic/element/form/Form';
+import MemberContext from '../../../context/MemberContext';
+import { useContext } from "react";
+import Cookies from 'js-cookie';
 
 function Login(props) {
+    const {memberId, setMemberId} = useContext(MemberContext);
+
     const inputs = [
         {
             "label": 'id',
@@ -19,6 +24,12 @@ function Login(props) {
         },
     ]
 
+    const onLogin = (response)=>{
+        console.log(response)
+        setMemberId(Cookies.get('member_id'))
+        alert('로그인 성공')
+    }
+
     const action = "/api/member/login"
     const method = "post"
     return (
@@ -28,6 +39,7 @@ function Login(props) {
                     inputs={inputs}
                     action={action}
                     method={method}
+                    callBack={onLogin}
                     successUrl='/'
                     title="로그인"
                 ></Form>

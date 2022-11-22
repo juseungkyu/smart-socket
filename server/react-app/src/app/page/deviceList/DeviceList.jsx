@@ -1,27 +1,18 @@
 import './deviceList.css'
 import Device from '../../basic/element/device/Device'
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function DeviceList(props) {
-    const deviceDumpDatas = [
-        {
-            deviceId: 'djeb382lks9',
-            deviceName: 'PC 콘센트',
-            isConnect : 1,
-            state: 0
-        },
-        {
-            deviceId: '123124fg575',
-            deviceName: '전등 콘센트',
-            isConnect : 0,
-            state: 1
-        },
-    ]
-
+    const [deviceList, setDeviceList] = useState([])
+    createPage(setDeviceList)
+    
     return (
         <section>
             <div className="deviceList gap-3 container">
                 {
-                    deviceDumpDatas.map((device)=>{
+                    deviceList.map((device)=>{
                         const {deviceId, deviceName, state, isConnect} = device
 
                         console.log(deviceId, state, isConnect)
@@ -39,6 +30,32 @@ function DeviceList(props) {
             </div>
         </section>
     );
+}
+
+let isProcessed = false;
+const createPage = async (setDeviceList) => {
+    if (isProcessed) {
+        return
+    }
+    isProcessed = true
+    
+    const config = { "Content-Type": 'application/json' };
+    try {
+        const response = await axios.get(`/api/device/all`, config);
+        console.log(response);
+    } catch (error) {
+        console.error(error);
+        alert('불러오기 실패')
+        isProcessing = false
+        return
+    }
+    
+    const deviceList = [
+
+    ]
+
+    console.log(deviceList)
+    setDeviceList(deviceList)
 }
 
 export default DeviceList;

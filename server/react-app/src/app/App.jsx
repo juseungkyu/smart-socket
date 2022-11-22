@@ -19,8 +19,8 @@ import MemberContext from '../context/MemberContext';
 import Cookies from 'js-cookie';
 
 function App(props) {
-	// const [memberId, setMemberId] = useState(Cookies.get('member_id'))
-	const [memberId, setMemberId] = useState(111)
+	const [memberId, setMemberId] = useState(Cookies.get('member_id'))
+	// const [memberId, setMemberId] = useState('test')
 
 	return (
 		<div className='App'>

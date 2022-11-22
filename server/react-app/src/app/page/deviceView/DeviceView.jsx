@@ -1,26 +1,28 @@
-import React from 'react';
+import React, {useState } from 'react';
 import './deviceView.css'
 import Device from '../../basic/element/device/Device'
 import Form from '../../basic/element/form/Form';
 import StateRadio from './stateRadio/StateRadio';
 import { useParams } from 'react-router-dom';
 
+import axios from 'axios';
+
 function DeviceView(props) {
     let { deviceId } = useParams();
+    const [ page, setPage ] = useState();
 
-    const dumpData = {
-        deviceId: '123124fg575',
-        deviceName: '전등 콘센트',
-        isConnect : 0,
-        state: 1
+    createPage(setPage, deviceId)
+
+    return page;
+}
+
+let isProcessed = false;
+const createPage = async (setPage, deviceId) => {
+    if (isProcessed) {
+        return
     }
-
-    const {
-        deviceName,
-        isConnect,
-        state
-    } = dumpData
-
+    isProcessed = true
+    
     const inputs = [
         {
             "label": 'name',
@@ -40,7 +42,19 @@ function DeviceView(props) {
 
     const action = 'api/device/update'
     const method = 'POST'
-    return (
+    
+    const config = { "Content-Type": 'application/json' };
+    try {
+        const response = await axios.get(`/api/device/${deviceId}`, config);
+        console.log(response);
+    } catch (error) {
+        console.error(error);
+        alert('불러오기 실패')
+        isProcessing = false
+        return
+    }
+    
+    const page = (
         <section>
             <div className="deviceView gap-3 container d-flex flex-col align-center">
                 <Device 
@@ -61,6 +75,11 @@ function DeviceView(props) {
             </div>
         </section>
     );
+
+    console.log(page)
+    setPage(page)
 }
+
+
 
 export default DeviceView;
