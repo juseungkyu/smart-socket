@@ -52,7 +52,7 @@ module.exports = class extends DAO {
   */
   async applicationDevice(deviceId, memberId) {
     const result = {};
-    const sql = "UPDATE device SET member_id=? WHERE deviceId=?";
+    const sql = "UPDATE device SET member_id=? WHERE device_id=?";
     const data = {deviceId, memberId};
 
     const isSuccess = await this.run(sql, data, result)

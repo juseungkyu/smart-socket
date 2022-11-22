@@ -56,7 +56,7 @@ module.exports = class extends DAO {
   async modifyMemberPassword(memberId, memberPwd) {
 
     const result = {}
-    const sql = 'update member set memberpwd=? where memberid=?';
+    const sql = 'update member set member_pw=? where member_id=?';
     const data = [memberId,memberPwd]
     
     const isSuccess = await this.run(sql, data, result)
@@ -71,7 +71,7 @@ module.exports = class extends DAO {
   // true, false로 반환.
   async deleteMember(memberId) {
     const result = {}
-    const sql = 'delete member where memberid=?';
+    const sql = 'delete member where member_id=?';
     const data = { memberId, memberPwd, memberName}
     
     const isSuccess = await this.run(sql, data, result)
