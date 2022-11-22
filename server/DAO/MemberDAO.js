@@ -7,9 +7,7 @@ module.exports = class extends DAO {
 
   //사용자 가져오는 함수
   async getMember(memberId) {
-    const result = {
-      id : 1
-    }
+    const result = {}
     const sql = 'select * from member where member_id=?';
     const data = [memberId]
     const isSuccess = await this.run(sql, data, result)
@@ -22,9 +20,7 @@ module.exports = class extends DAO {
 
   //사용자 가져오는 함수
   async loginMember(memberId, memberPwd) {
-    const result = {
-      id : 1
-    }
+    const result = {}
     const sql = 'select * from member where member_id=? AND member_pwd=?';
     const data = [memberId, memberPwd]
     const isSuccess = await this.run(sql, data, result)
