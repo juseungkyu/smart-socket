@@ -16,7 +16,7 @@ module.exports = class UpdateStateController extends Controller {
         const {deviceId} = req.params
 
         if(!deviceId) {
-            this.sendResponse(false, 400, {message:'bad request'}, res);
+            this.sendResponse(false, 400, {message:'디바이스 아이디 값이 확인되지 않았습니다.'}, res);
             return
         }
 

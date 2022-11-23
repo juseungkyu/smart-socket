@@ -15,7 +15,7 @@ module.exports = class MemberChangeController extends Controller {
     get = async (req, res) => {
         const { memberId, memberPwd, newMemberPwd } = req.query
         if (!userId || !userPwd || memberPwd!=newUserPwd) {
-            this.sendResponse(false, 400, {message:'bad request'}, res)
+            this.sendResponse(false, 400, {message:'요청이 잘못되었습니다. 입력값 확인 요망'}, res)
             return
         }
 
