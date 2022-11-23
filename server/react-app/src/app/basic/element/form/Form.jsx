@@ -65,9 +65,7 @@ function Form(props) {
         try {
             const response = await axios[method](action, data, config);
             console.log(response);
-            console.log(successUrl)
             navigate(`${successUrl}`);
-            console.log(callBack)
             callBack(response)
         } catch (error) {
             console.error(error);
