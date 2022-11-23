@@ -1,7 +1,7 @@
 import './deviceList.css'
+import Device from '../../basic/element/device/Device'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import DeviceTree from './deviceTree/DeviceTree';
 
 function DeviceList(props) {
     const [deviceList, setDeviceList] = useState([])
@@ -15,7 +15,22 @@ function DeviceList(props) {
     return (
         <section>
             <div className="deviceList gap-3 container">
-                <DeviceTree deviceList={deviceList}></DeviceTree>
+                {
+                    deviceList.map((device) => {
+                        const { deviceId, deviceName, state, isConnect } = device
+
+                        console.log(deviceId, state, isConnect)
+
+                        return (<Device
+                            key={deviceId}
+                            deviceId={deviceId}
+                            deviceName={deviceName}
+                            isConnect={isConnect}
+                            state={state}
+                        />)
+                    })
+                }
+
             </div>
         </section>
     );
@@ -28,10 +43,13 @@ const createPage = async (setDeviceList) => {
     }
     isProcessed = true
 
+    console.log(isProcessed)
+
     let deviceList = []
     const config = { "Content-Type": 'application/json' };
     try {
         const response = await axios.get(`/api/device/all`, config);
+        console.log('hi')
         deviceList = response.data.data;
     } catch (error) {
         console.error(error);
@@ -45,8 +63,7 @@ const createPage = async (setDeviceList) => {
             device_name,
             member_id,
             is_connect,
-            state,
-            parent_device
+            state
         } = device
 
         return {
@@ -54,11 +71,11 @@ const createPage = async (setDeviceList) => {
             deviceName: device_name,
             memberId: member_id,
             isConnect: is_connect,
-            parentDevice: parent_device,
             state
         }
     })
 
+    console.log(deviceList)
     setDeviceList(deviceList)
 }
 

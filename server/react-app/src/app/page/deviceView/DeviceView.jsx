@@ -1,8 +1,5 @@
 import React, {useState } from 'react';
 import './deviceView.css'
-import Device from '../../basic/element/device/Device'
-import Form from '../../basic/element/form/Form';
-import StateRadio from './stateRadio/StateRadio';
 import { useParams } from 'react-router-dom';
 
 import axios from 'axios';
