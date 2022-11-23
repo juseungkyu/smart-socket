@@ -1,5 +1,4 @@
-import './deviceTree.css'
-import Device from '../../../basic/element/device/Device'
+import './deviceTree.css';
 import React from 'react';
 
 let count = 0
@@ -7,10 +6,15 @@ function DeviceTree(props) {
     const { deviceList } = props
 
     console.log(count, deviceList)
+    count++
 
     const deviceTree = createTree(deviceList)
     console.log(deviceTree)
-    return (createTreeDom(deviceTree));
+    return (
+        <section className='device-tree'>
+            {createTreeDom(deviceTree)}
+        </section>
+    );
 }
 
 // deviceList를 tree 형식으로 변환
@@ -29,8 +33,8 @@ const createTree = (deviceList) => {
         deviceList = deviceList.filter(device => {
             const { parentDevice } = device
             if (currentNode.deviceId === parentDevice) {
+                console.log(currentNode.deviceId , parentDevice, currentNode.deviceId === parentDevice)
                 device.children = []
-                delete device.parentDevice
                 currentNode.children.push(device)
                 return false
             }
@@ -45,6 +49,10 @@ const createTree = (deviceList) => {
 }
 
 const createTreeDom = (deviceTree) => {
+    if(deviceTree.children.length == 0){
+        return (null)
+    }
+
     return (
         <ul>
             {
@@ -53,7 +61,7 @@ const createTreeDom = (deviceTree) => {
                     return (
                         <li>
                             <a href={`/device/${deviceId}`}>{deviceName}</a>
-                            {createTreeDom(children)}
+                            {createTreeDom(device)}
                         </li>
                     )
                 })
