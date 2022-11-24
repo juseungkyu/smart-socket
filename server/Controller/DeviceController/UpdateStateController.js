@@ -20,6 +20,11 @@ module.exports = class UpdateStateController extends Controller {
             return
         }
 
+        if(!state) {
+            this.sendResponse(false, 400, {message:'디바이스 상태 값이 확인되지 않았습니다.'}, res);
+            return
+        }
+
         const {isSuccess, result} = await this.deviceDAO.changeDeviceState(deviceId, state);
 
         if (isSuccess) {

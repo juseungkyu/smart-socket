@@ -15,9 +15,15 @@ module.exports = class UpdateNameController extends Controller {
     post = async (req, res)=>{
         const {deviceId, deviceName} = req.body
 
-        if(!deviceId || !deviceName) {
+        if(!deviceId) {
             console.log(deviceId, deviceName)
             this.sendResponse(false, 400, {message:'디바이스 아이디 값이 확인되지 않았습니다.'}, res);
+            return
+        }
+
+        if(!deviceName){
+            console.log(deviceId, deviceName)
+            this.sendResponse(false, 400, {message:'디바이스 이름 값이 확인되지 않았습니다.'}, res);
             return
         }
 
