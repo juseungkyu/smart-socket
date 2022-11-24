@@ -5,7 +5,7 @@ module.exports = class extends DAO {
     super()
   }
 
-  //사용자 가져오는 함수
+  //디바이스 가져오는 함수
   async getDevice(deviceId) {
     const result = {}
     const sql = 'select * from device where device_id=?';
@@ -18,12 +18,24 @@ module.exports = class extends DAO {
     }
   }
 
-  async getAllDevice(memberId) {
-    const result = {
-      id : 1
-    }
+  // 디바이스 리스트
+  async getListDevice(memberId) {
+    const result = {}
     const sql = 'select * from device where member_id = ?';
     const data = [memberId]
+    const isSuccess = await this.run(sql, data, result)
+
+    return {
+      isSuccess,
+      result: result.dbResult
+    }
+  }
+
+  // 디바이스 전체
+  async getAllDevice() {
+    const result = {}
+    const sql = 'select * from device';
+    const data = []
     const isSuccess = await this.run(sql, data, result)
 
     return {

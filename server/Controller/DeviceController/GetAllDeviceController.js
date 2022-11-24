@@ -21,7 +21,7 @@ module.exports = class GetAllDeviceController extends Controller {
             return
         }
 
-        const info = await this.deviceDAO.getAllDevice(memberId);
+        const info = await this.deviceDAO.getListDevice(memberId);
 
         if (info.isSuccess) {
             this.sendResponse(true, 200, info.result, res);
