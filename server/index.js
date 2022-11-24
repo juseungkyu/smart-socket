@@ -72,7 +72,7 @@ async function initDeviceConnect() {
         const {deviceId} = device
         const timer = setTimeout(()=>{
             deviceDAO.changeDeviceConnect(deviceId, 0)
-        }, 5)
+        }, 5000)
         deviceTimerMap.set(deviceId, timer)
     }
 }

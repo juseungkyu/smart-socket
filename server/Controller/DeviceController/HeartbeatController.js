@@ -24,14 +24,17 @@ module.exports = class HeartbeatController extends Controller {
         const beforeTimer = deviceTimerMap.get(deviceId)
         clearTimeout(beforeTimer)
         const timer = setTimeout(()=>{
-            deviceDAO.changeDeviceConnect(deviceId, 0)
-        }, 5)
+            this.deviceDAO.changeDeviceConnect(deviceId, 0)
+        }, 5000)
         deviceTimerMap.set(deviceId, timer)
 
-        if (info.isSuccess) {
-            this.sendResponse(true, 200, info.result, res);
+        const {isSuccess} = await this.deviceDAO.changeDeviceConnect(deviceId, 1)
+
+
+        if (isSuccess) {
+            this.sendResponse(true, 200, {message:'연결 성공'}, res);
         } else {
-            this.sendResponse(false, 400, {message:'서버 연결 실패'}, res)
+            this.sendResponse(false,400, {message:'서버 연결 실패'}, res)
         }
     }
     
