@@ -48,7 +48,6 @@ app.use('/api', apiRouter)
 const reactPath = path.join(__dirname, 'react-app/build/index.html')
 console.log(reactPath)
 app.use(express.static(path.join(__dirname, 'react-app/build/')))
-app.use(express.static(path.join(__dirname, 'react-app/build/index.html')))
 
 app.get('/', (req, res) => {
     res.sendFile(reactPath)

@@ -5,7 +5,7 @@ const DeviceDAO = require('../../DAO/DeviceDAO');
 const DeviceVO = require('../../VO/Device');
 const MemberVO = require('../../VO/Member');
 
-module.exports = class UpdateStateController extends Controller {
+module.exports = class UpdateNameController extends Controller {
     constructor() {
         super();
         
@@ -13,14 +13,16 @@ module.exports = class UpdateStateController extends Controller {
     }
 
     post = async (req, res)=>{
-        const {deviceId, state} = req.body
+        const {deviceId, deviceName} = req.body
 
-        if(!deviceId || !state) {
+        if(!deviceId || !deviceName) {
+            console.log(deviceId, deviceName)
             this.sendResponse(false, 400, {message:'디바이스 아이디 값이 확인되지 않았습니다.'}, res);
             return
         }
 
-        const {isSuccess, result} = await this.deviceDAO.changeDeviceState(deviceId, state);
+        const time = Date.now()
+        const {isSuccess, result} = await this.deviceDAO.changeDevice(deviceId, deviceName);
 
         if (isSuccess) {
             this.sendResponse(true, 200, result, res);

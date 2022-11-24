@@ -11,7 +11,7 @@ import React, { useState } from 'react';
  * @returns Form
  */
 function StateRadio(props) {
-    const {value} = props;
+    const {value, onChange} = props;
 
     console.log(value)
 
@@ -27,11 +27,11 @@ function StateRadio(props) {
             <div className='d-flex mt-2'>
                 <div className='radio-box'>
                     <p>켜짐</p>
-                    <input onChange={handleChange} checked={inputValue=='1' ? true : false} type="radio" value='1' name="state"/>
+                    <input onChange={(e)=>{handleChange(e); onChange(e)}} checked={inputValue=='1' ? true : false} type="radio" value='1' name="state"/>
                 </div>
                 <div>
                     <p>꺼짐</p>
-                    <input onChange={handleChange} checked={inputValue=='0' ? true :false} type="radio" value='0' name="state"/>
+                    <input onChange={(e)=>{handleChange(e); onChange(e)}} checked={inputValue=='0' ? true :false} type="radio" value='0' name="state"/>
                 </div>
             </div>
         </div>

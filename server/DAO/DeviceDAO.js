@@ -68,7 +68,21 @@ module.exports = class extends DAO {
   async changeDeviceState(deviceId, state) {
     const result = {}
     const sql = 'update device set state=? where device_id=?';
-    const data = [deviceId,state]
+    const data = [state, deviceId]
+    
+    const isSuccess = await this.run(sql, data, result)
+
+    return {
+      isSuccess,
+      result: result.dbResult
+    }
+  }
+
+  //장치 변경함수
+  async changeDevice(deviceId, deviceName) {
+    const result = {}
+    const sql = 'update device set device_name=? where device_id=?';
+    const data = [deviceName, deviceId]
     
     const isSuccess = await this.run(sql, data, result)
 
@@ -96,7 +110,7 @@ module.exports = class extends DAO {
   // 장치 접속
   async deviceConnect(deviceId, time) {
     const result = {}
-    const sql = 'UPDATE device SET is_connect=1, last_connect=? WHERE device_id=?'
+    const sql = 'UPDATE device SET last_connect=? WHERE device_id=?'
     const data = {time, deviceId}
 
     const isSuccess = await this.run(sql, data, result)

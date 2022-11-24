@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './deviceView.css'
 import { useParams } from 'react-router-dom';
 import Device from '../../basic/element/device/Device';
@@ -8,13 +8,17 @@ import StateRadio from './stateRadio/StateRadio'
 import axios from 'axios';
 
 function DeviceView(props) {
-    let { deviceId } = useParams();
-    const [ page, setPage ] = useState();
+    const [ page, setPage ] = useState((null));
 
-    console.log(deviceId)
+    let { deviceId } = useParams();
+
+    useEffect(() => {
+        isProcessed = false
+        createPage(setPage, deviceId)
+        return () => {};
+    }, []);
 
     createPage(setPage, deviceId)
-
     return page;
 }
 
@@ -25,14 +29,12 @@ async function createPage (setPage, deviceId) {
     }
     isProcessed = true
 
-    const action = 'api/device/update'
-    const method = 'POST'
-    
     let device = null
     const config = { "Content-Type": 'application/json' };
     try {
         const response = await axios.get(`/api/device/${deviceId}`, config);
         device = response.data.data;
+        console.log(device)
     } catch (error) {
         console.error(error);
         alert('불러오기 실패')
@@ -42,14 +44,14 @@ async function createPage (setPage, deviceId) {
     const {
         device_name: deviceName,
         is_connect: isConnect,
-        state: state,
+        state
     } = device
     
     const inputs = [
         {
             "label": 'name',
             "type": 'text',
-            "name": 'memberId',
+            "name": 'deviceName',
             "value": deviceName,
             "readonly": false 
         },
@@ -61,7 +63,24 @@ async function createPage (setPage, deviceId) {
             "readonly": false 
         },
     ]
-    
+    const action = '/api/device/update/name'
+    const method = 'post'
+
+    const stateObj = {state}
+    const onUpdate = async  () => {
+        const isSuccess = await updateState(stateObj.state, deviceId)
+        if(isSuccess){
+            alert('변경 성공')
+        }
+        isProcessed = false
+        createPage(setPage, deviceId)
+    }
+
+    const changeState = (e)=>{
+        console.log(stateObj)
+        stateObj['state'] = e.target.value
+    } 
+
     const page = (
         <section>
             <div className="deviceView gap-3 container d-flex flex-col align-center">
@@ -76,9 +95,11 @@ async function createPage (setPage, deviceId) {
                     inputs={inputs}
                     action={action}
                     method={method}
+                    callBack={onUpdate}
+                    successUrl='#'
                     title='수정'
                 >
-                    <StateRadio value={state}></StateRadio>
+                    <StateRadio value={state} onChange={changeState}></StateRadio>
                 </Form>
             </div>
         </section>
@@ -88,6 +109,19 @@ async function createPage (setPage, deviceId) {
     setPage(page)
 }
 
+
+async function updateState(state, deviceId) {
+    const config = { "Content-Type": 'application/json' };
+    const data = {state, deviceId}
+    try {
+        const response = await axios.post(`/api/device/update/state`, data, config);
+        return true
+    } catch (error) {
+        console.error(error);
+        alert('변경 실패')
+        return false
+    }
+}
 
 
 export default DeviceView;
