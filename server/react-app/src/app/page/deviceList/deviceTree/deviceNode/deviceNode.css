@@ -1,4 +1,23 @@
-.deviceList {
+.device-node {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(255, 100, 100);
+}
+
+.device-node.unconnect {
+    background-color: rgb(197, 197, 197);    
+}
+.device-node.active {
+    background-color: rgb(100, 255, 100);
+}
+
+.device-node>div {
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.device-node p {
+    text-align: center;
 }

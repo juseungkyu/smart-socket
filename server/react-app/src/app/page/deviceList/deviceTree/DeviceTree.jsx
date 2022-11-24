@@ -1,15 +1,11 @@
 import './deviceTree.css';
 import React from 'react';
+import DeviceNode from './deviceNode/DeviceNode';
 
-let count = 0
 function DeviceTree(props) {
     const { deviceList } = props
 
-    console.log(count, deviceList)
-    count++
-
     const deviceTree = createTree(deviceList)
-    console.log(deviceTree)
     return (
         <section className='device-tree'>
             {createTreeDom(deviceTree)}
@@ -60,7 +56,12 @@ const createTreeDom = (deviceTree) => {
                     const {deviceId, deviceName, state, isConnect, children} = device
                     return (
                         <li>
-                            <a href={`/device/${deviceId}`}>{deviceName}</a>
+                            <DeviceNode 
+                                deviceId={deviceId}
+                                deviceName={deviceName}
+                                state={state}
+                                isConnect={isConnect}
+                            />
                             {createTreeDom(device)}
                         </li>
                     )

@@ -1,6 +1,9 @@
 import React, {useState } from 'react';
 import './deviceView.css'
 import { useParams } from 'react-router-dom';
+import Device from '../../basic/element/device/Device';
+import Form from '../../basic/element/form/Form';
+import StateRadio from './stateRadio/StateRadio'
 
 import axios from 'axios';
 
@@ -16,7 +19,7 @@ function DeviceView(props) {
 }
 
 let isProcessed = false;
-const createPage = async (setPage, deviceId) => {
+async function createPage (setPage, deviceId) {
     if (isProcessed) {
         return
     }
@@ -37,7 +40,6 @@ const createPage = async (setPage, deviceId) => {
     }
 
     const {
-        device_id: deviceId,
         device_name: deviceName,
         is_connect: isConnect,
         state: state,
