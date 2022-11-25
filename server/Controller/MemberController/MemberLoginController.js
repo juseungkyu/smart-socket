@@ -13,7 +13,7 @@ module.exports = class MemberLoginController extends Controller {
     post = async (req, res) => {
         const { memberId, memberPw } = req.body
         if (!memberId || !memberPw) {
-            this.sendResponse(false, 400, { message: 'bad request' }, res);
+            this.sendResponse(false, 400, { message: '요청이 잘못되었습니다. 입력값 확인 요망t' }, res);
             return
         }
 
