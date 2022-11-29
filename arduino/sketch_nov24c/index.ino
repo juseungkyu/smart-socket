@@ -1,10 +1,25 @@
+#include <ESP8266HTTPClient.h>
+
 #include <ESP8266WiFi.h>
 
-const char *ssid = "와이파이 이름";
-const char *password = "비밀번호";
+const char *ssid = "test_ap";
+const char *password = "1q2w3e4r";
+const char *deviceid = "1";
+// 일단 서버주소/heartbeat/deviceId
+// 127.0.0.1/heartbeat/1 / if(deviceid>0) { hearbeat = "127.0.0.1/heartbeat/" + deviceId; }
+// 3초에 한번씩 저 위의 heartbeat 주소로 접속해서 살아있음을 보내줘야함 / delay(1000);
+// 서버주소/deviceId
+// 우리가 저 서버로 접속해서
+// 장치의 상태값(장치 이름, 장치 켜짐 상태) 
+// 받아와서 만약 현재의 값과 다르다면 변경 / if(기본값 != 가져온값){ 기본값은 = 가져온값; }
+// 저거는 대충 2초에 한번씩 되도록 1초에 한번씩  delay(1000);
+const char* host = "Host 주소";
+
+WiFiClient client;
+HTTPClient http;
+
 
 int ledPin = 2;
-WiFiServer server(80); // NODE MCU를 서버로 사용하겠다 // 포트번호는 80
 
 void setup()
 {
@@ -24,7 +39,7 @@ void setup()
 
   while (WiFi.status() != WL_CONNECTED)
   { // 네트워크의 연결 상태, 8개의 리턴값
-    / STATUS와 WL_CONNECTED 값이 같은지를 통해 제대로 연결이 되있는지를 확인할 수 있다
+    // STATUS와 WL_CONNECTED 값이 같은지를 통해 제대로 연결이 되있는지를 확인할 수 있다
             delay(500);
     Serial.print(".");
   }
@@ -34,8 +49,7 @@ void setup()
   server.begin();
   Serial.println("Server started");
 
-  Serial.print("Use this URL to connect: ");
-  Serial.print("http://");
+  Serial.print("device IP Address : ");
   Serial.print(WiFi.localIP());
   // 서버 IP주소를 알려준다. 브라우저의 주소란에 치면 NODE MCU가 서버로 있는 것으로 접근할 수 있다.
   Serial.println("/");
@@ -44,171 +58,41 @@ void setup()
 
 void loop()
 {
-  // put your main code here, to run repeatedly:
-  WiFiClient client = server.available();
-  if (!client)
-  {
-    return;
+  Serial.printf("Connect to %s\n", host);
+  http.begin(client, host);
+  http.setTimeout(1000);
+  int httpCode = http.GET();
+ 
+  if(httpCode > 0) {
+    Serial.printf("GET code : %d\n\n", httpCode);
+    
+    if (httpCode == HTTP_CODE_OK) {
+      String payload = http.getString();
+      Serial.println(payload);
+    }
+  } 
+  else {
+    Serial.printf("GET failed, error: %s\n", http.errorToString(httpCode).c_str());
   }
-  Serial.println("new client");
-  while (!client.available())
-  {
-    delay(1);
+  http.end();
+ 
+  delay(5000);  Serial.printf("Connect to %s\n", host);
+  http.begin(client, host);
+  http.setTimeout(1000);
+  int httpCode = http.GET();
+ 
+  if(httpCode > 0) {
+    Serial.printf("GET code : %d\n\n", httpCode);
+    
+    if (httpCode == HTTP_CODE_OK) {
+      String payload = http.getString();
+      Serial.println(payload);
+    }
+  } 
+  else {
+    Serial.printf("GET failed, error: %s\n", http.errorToString(httpCode).c_str());
   }
-  // 서버와 연결된 클라이언트가 있으면 다음으로 넘어가라
-
-  String request = client.readStringUntil('\r');
-  // \r 명령어, 즉 줄 바꿈 명령어가 나오기 전까지 계속 데이터를 읽어라
-
-  Serial.println(request);
-  client.flush();
-  // 버퍼에 남은것을 없애라
-
-  int value = LOW;
-  if (request.indexOf("/LED=ON") != -1)
-  {
-    digitalWrite(ledPin, HIGH);
-    value = HIGH;
-  }
-  // 읽어들인 문자에 /LED=ON 이 있는지 없는지 확인하라, (즉 /LED=ON 이 -1 인 상태)
-  // 그리고 digitalWrite에 적용되는 핀에 맞추어서 값을 HIGH로 가져라 ==> 불을 켜라
-
-  if (request.indexOf("/LED=OFF") != -1)
-  {
-    digitalWrite(ledPin, LOW);
-    value = LOW;
-  }
-  //
-  // 읽어들인 문자에 /LED=OFF 이 있는지 없는지 확인하라, (즉 /LED=OFF 이 -1 인 상태)
-  // 그리고 digitalWrite에 적용되는 핀에 맞추어서 값을 LOW로 가져라 ==> 불을 꺼라
-
-  client.println("HTTP/1.1 200 OK");
-  client.println("Content-Type : text/html");
-  client.println("");
-  client.println("<!DOCTYPE HTML>");
-  client.println("<html>");
-  client.println("LED is turned ");
-  if (value)
-    client.println("On");
-  else
-    client.print("Off");
-
-  client.println("<br><br>");
-  client.println("<a href = \"/LED=ON\"\"><button>Turn On</button></a>");
-
-  client.println("<a href = \"/LED=OFF\"\"><button>Turn Off</button></a>");
-  client.println("</html>");
-  // HTML로 서버에 버튼을 생성하고 사이트를 만들어라
-  delay(1);
-
-  Serial.println(client.connect("http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?serviceKey=VlJoz90r6QOqEXPQIwP0jdLqCtgkQbgXo%2Fy0L%2B4x6z6VjH5LPx3RPYAH4RAJmaqSWCh7BM7s5KCSDPR5s%2F27Lg%3D%3D&base_date=20190704&base_time=0500&nx=60&n=127&numOfRows=10&pageNo=1&_type=xml", 8));
-  Serial.println("Client disconnected !! ");
-  Serial.println();
-}
-#include <ESP8266WiFi.h>
-
-const char *ssid = "와이파이 이름";
-const char *password = "비밀번호";
-
-int ledPin = 2;
-WiFiServer server(80); // NODE MCU를 서버로 사용하겠다 // 포트번호는 80
-
-void setup()
-{
-  // put your setup code here, to run once:
-  Serial.begin(115200);
-  delay(100);
-
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, LOW);
-
-  Serial.println();
-  Serial.print("CONNECTING TO ");
-  Serial.println(ssid);
-
-  WiFi.begin(ssid, password); // 와이파이 이름과 비밀번호를 통해 WIFI연결을 시작하겠다
-  // WL_CONNECTED라는 값을 돌려준다
-
-  while (WiFi.status() != WL_CONNECTED)
-  { // 네트워크의 연결 상태, 8개의 리턴값
-    / STATUS와 WL_CONNECTED 값이 같은지를 통해 제대로 연결이 되있는지를 확인할 수 있다
-            delay(500);
-    Serial.print(".");
-  }
-  Serial.println();
-  Serial.println("Wifi connected!");
-
-  server.begin();
-  Serial.println("Server started");
-
-  Serial.print("Use this URL to connect: ");
-  Serial.print("http://");
-  Serial.print(WiFi.localIP());
-  // 서버 IP주소를 알려준다. 브라우저의 주소란에 치면 NODE MCU가 서버로 있는 것으로 접근할 수 있다.
-  Serial.println("/");
-  Serial.println("");
-}
-
-void loop()
-{
-  // put your main code here, to run repeatedly:
-  WiFiClient client = server.available();
-  if (!client)
-  {
-    return;
-  }
-  Serial.println("new client");
-  while (!client.available())
-  {
-    delay(1);
-  }
-  // 서버와 연결된 클라이언트가 있으면 다음으로 넘어가라
-
-  String request = client.readStringUntil('\r');
-  // \r 명령어, 즉 줄 바꿈 명령어가 나오기 전까지 계속 데이터를 읽어라
-
-  Serial.println(request);
-  client.flush();
-  // 버퍼에 남은것을 없애라
-
-  int value = LOW;
-  if (request.indexOf("/LED=ON") != -1)
-  {
-    digitalWrite(ledPin, HIGH);
-    value = HIGH;
-  }
-  // 읽어들인 문자에 /LED=ON 이 있는지 없는지 확인하라, (즉 /LED=ON 이 -1 인 상태)
-  // 그리고 digitalWrite에 적용되는 핀에 맞추어서 값을 HIGH로 가져라 ==> 불을 켜라
-
-  if (request.indexOf("/LED=OFF") != -1)
-  {
-    digitalWrite(ledPin, LOW);
-    value = LOW;
-  }
-  //
-  // 읽어들인 문자에 /LED=OFF 이 있는지 없는지 확인하라, (즉 /LED=OFF 이 -1 인 상태)
-  // 그리고 digitalWrite에 적용되는 핀에 맞추어서 값을 LOW로 가져라 ==> 불을 꺼라
-
-  client.println("HTTP/1.1 200 OK");
-  client.println("Content-Type : text/html");
-  client.println("");
-  client.println("<!DOCTYPE HTML>");
-  client.println("<html>");
-  client.println("LED is turned ");
-  if (value)
-    client.println("On");
-  else
-    client.print("Off");
-
-  client.println("<br><br>");
-  client.println("<a href = \"/LED=ON\"\"><button>Turn On</button></a>");
-
-  client.println("<a href = \"/LED=OFF\"\"><button>Turn Off</button></a>");
-  client.println("</html>");
-  // HTML로 서버에 버튼을 생성하고 사이트를 만들어라
-  delay(1);
-
-  Serial.println(client.connect("http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?serviceKey=VlJoz90r6QOqEXPQIwP0jdLqCtgkQbgXo%2Fy0L%2B4x6z6VjH5LPx3RPYAH4RAJmaqSWCh7BM7s5KCSDPR5s%2F27Lg%3D%3D&base_date=20190704&base_time=0500&nx=60&n=127&numOfRows=10&pageNo=1&_type=xml", 8));
-  Serial.println("Client disconnected !! ");
-  Serial.println();
+  http.end();
+ 
+  delay(5000);
 }
