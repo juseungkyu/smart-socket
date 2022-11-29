@@ -109,7 +109,7 @@ module.exports = class extends DAO {
   async changeDeviceConnect(deviceId, isConnect) {
     const result = {}
     const sql = 'update device set is_connect=? where device_id=?';
-    const data = [deviceId,isConnect]
+    const data = [isConnect, deviceId]
     
     const isSuccess = await this.run(sql, data, result)
 

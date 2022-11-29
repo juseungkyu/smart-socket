@@ -22,14 +22,15 @@ module.exports = class HeartbeatController extends Controller {
 
         const deviceTimerMap = req.app.get('deviceTimerMap');
         const beforeTimer = deviceTimerMap.get(deviceId)
-        clearTimeout(beforeTimer)
-        const timer = setTimeout(()=>{
-            this.deviceDAO.changeDeviceConnect(deviceId, 0)
-        }, 5000)
-        deviceTimerMap.set(deviceId, timer)
+        clearInterval(beforeTimer)
 
         const {isSuccess} = await this.deviceDAO.changeDeviceConnect(deviceId, 1)
 
+        const interval = setInterval(async ()=>{
+            await this.deviceDAO.changeDeviceConnect(deviceId, 0)
+            clearInterval(interval)
+        }, 5000)
+        deviceTimerMap.set(deviceId, interval)
 
         if (isSuccess) {
             this.sendResponse(true, 200, {message:'연결 성공'}, res);

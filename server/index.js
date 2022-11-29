@@ -58,7 +58,6 @@ app.get('*', (req, res) => {
 // 디바이스 연결 상태 초기 설정
 
 const deviceTimerMap = new Map()
-app.set('deviceTimerMap', deviceTimerMap)
 
 async function initDeviceConnect() {
     const deviceDAO = new DeviceDAO()
@@ -69,12 +68,16 @@ async function initDeviceConnect() {
     }
 
     for(let device of result) {
-        const {deviceId} = device
-        const timer = setTimeout(()=>{
-            deviceDAO.changeDeviceConnect(deviceId, 0)
+        const {device_id : deviceId} = device
+        console.log(deviceId)
+        const interval = setInterval(async ()=>{
+            await deviceDAO.changeDeviceConnect(deviceId, 0)
+            clearInterval(interval)
         }, 5000)
-        deviceTimerMap.set(deviceId, timer)
+        deviceTimerMap.set(deviceId, interval)
     }
 }
+
+app.set('deviceTimerMap', deviceTimerMap)
 
 initDeviceConnect()
