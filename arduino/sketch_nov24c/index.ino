@@ -59,40 +59,30 @@ void setup()
 void loop()
 {
   Serial.printf("Connect to %s\n", host);
+  // 서버에 연결한다고 메세지 콘솔로 출력.
   http.begin(client, host);
+  // 연결 준비하기
   http.setTimeout(1000);
+  // 1초가 지나면 서버가 죽었다고 판단하기.
   int httpCode = http.GET();
+  // http코드는 서버에 접속했을때의 코드 값으로 설정하기.
  
   if(httpCode > 0) {
     Serial.printf("GET code : %d\n\n", httpCode);
-    
+    //http코드 출력
     if (httpCode == HTTP_CODE_OK) {
       String payload = http.getString();
+      // 서버에 접속했을때 내용을 payload에 넣기.
       Serial.println(payload);
+      //payload 출력
     }
   } 
-  else {
+  else { // 오류가 난다면
     Serial.printf("GET failed, error: %s\n", http.errorToString(httpCode).c_str());
-  }
-  http.end();
- 
-  delay(5000);  Serial.printf("Connect to %s\n", host);
-  http.begin(client, host);
-  http.setTimeout(1000);
-  int httpCode = http.GET();
- 
-  if(httpCode > 0) {
-    Serial.printf("GET code : %d\n\n", httpCode);
-    
-    if (httpCode == HTTP_CODE_OK) {
-      String payload = http.getString();
-      Serial.println(payload);
-    }
-  } 
-  else {
-    Serial.printf("GET failed, error: %s\n", http.errorToString(httpCode).c_str());
+    // 접속 오류 메세지 띄우고, 오류를 출력하기.
   }
   http.end();
  
   delay(5000);
+ 
 }
