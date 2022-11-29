@@ -1,5 +1,5 @@
 import './deviceCreate.css'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Form from '../../basic/element/form/Form';
 import DeviceTree from './deviceTree/DeviceTree';
 import axios from 'axios';
@@ -49,24 +49,31 @@ function DeviceCreate(props) {
             "type": 'hidden',
             "name": 'parentDevice',
             "value": parentNode.deviceId,
-            "readonly": false
+            "readonly": true
         },
     ]
 
     const action = "/api/device/create"
     const method = "post"
 
+    const form = <Form
+            inputs={inputs}
+            action={action}
+            method={method}
+            callBack={onCreate}
+            successUrl='/'
+            title="기기 등록하기"
+            ref={childRef}
+        ></Form>
+
+    console.log(childRef)
+
+    childRef.current.changeValue('parentDevice', parentNode.deviceId)
+
     return (
         <section>
             <div className="deviceCreate container flex-col d-flex justify-center align-center">
-                <Form
-                    inputs={inputs}
-                    action={action}
-                    method={method}
-                    callBack={onCreate}
-                    successUrl='/'
-                    title="기기 등록하기"
-                ></Form>
+                {form}
                 <h3>부모 기기 선택 (현재 선택 : {parentNode.deviceName})</h3>
                 {deviceTree ? deviceTree : (null)}
             </div>

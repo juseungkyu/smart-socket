@@ -2,6 +2,7 @@ import './form.css'
 import Input from './input/Input';
 import Btn from '../btn/Btn';
 import axios from 'axios';
+import { useImperativeHandle } from 'react';
 import { useNavigate } from "react-router-dom";
 
 /**
@@ -20,11 +21,18 @@ import { useNavigate } from "react-router-dom";
  * } props 
  * @returns 
  */
-function Form(props) {
+function Form(props, ref) {
     const navigate = useNavigate();
     const { title, inputs, action, method, children, successUrl, callBack } = props;
 
     const valueMap = {}
+
+    console.log(ref)
+
+    // ref.current.changeValue = changeValue = (key, value) => {
+    //     valueMap[key] = value
+    // }
+
     const inputDoms = inputs.map((inputData) => {
         const { label, type, name, value, readonly } = inputData
 
@@ -59,6 +67,8 @@ function Form(props) {
         valueKeys.forEach(x => {
             data[x] = valueMap[x]
         })
+
+        console.log(data)
 
         const config = { "Content-Type": 'application/json' };
 

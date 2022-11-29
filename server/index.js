@@ -69,7 +69,6 @@ async function initDeviceConnect() {
 
     for(let device of result) {
         const {device_id : deviceId} = device
-        console.log(deviceId)
         const interval = setInterval(async ()=>{
             await deviceDAO.changeDeviceConnect(deviceId, 0)
             clearInterval(interval)

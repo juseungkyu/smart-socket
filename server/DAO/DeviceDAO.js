@@ -62,10 +62,10 @@ module.exports = class extends DAO {
   /**
   * 디바이스 등록 
   */
-  async applicationDevice(deviceId, deviceName, memberId) {
+  async applicationDevice(deviceId, deviceName, parentDevice, memberId) {
     const result = {};
-    const sql = "UPDATE device SET member_id=?, device_name=? WHERE device_id=?";
-    const data = [memberId, deviceName, deviceId];
+    const sql = "UPDATE device SET member_id=?, device_name=?, parent_device=? WHERE device_id=?";
+    const data = [memberId, deviceName, parentDevice, deviceId];
 
     const isSuccess = await this.run(sql, data, result)
 

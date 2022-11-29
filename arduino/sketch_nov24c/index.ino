@@ -51,7 +51,7 @@ void loop() {
           client.print(analogRead(0));
           client.print("<br>\r\n");
           client.print("</html>\r\n");
-          break;
+          break; 
         }
         if (c == '\n') {
           currentLineIsBlank = true;
