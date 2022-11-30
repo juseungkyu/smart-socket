@@ -28,7 +28,6 @@ const createTree = (deviceList) => {
         deviceList = deviceList.filter(device => {
             const { parentDevice } = device
             if (currentNode.deviceId === parentDevice) {
-                console.log(currentNode.deviceId , parentDevice, currentNode.deviceId === parentDevice)
                 device.children = []
                 currentNode.children.push(device)
                 return false
@@ -56,7 +55,6 @@ const createTreeDom = (deviceTree, setParentNode) => {
                    
                     const onClick = (e1)=>{
                         const device = {deviceId, deviceName}
-                        console.log('click', device)
                         setParentNode(device)
                     }
 

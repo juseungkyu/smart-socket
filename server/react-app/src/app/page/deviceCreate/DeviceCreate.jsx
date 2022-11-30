@@ -57,19 +57,17 @@ function DeviceCreate(props) {
     const action = "/api/device/create"
     const method = "post"
 
-    const form = <Form
-            inputs={inputs}
-            action={action}
-            method={method}
-            callBack={onCreate}
-            successUrl='/'
-            title="기기 등록하기"
-        ></Form>
-
     return (
         <section>
             <div className="deviceCreate container flex-col d-flex justify-center align-center">
-                {form}
+                <Form
+                    inputs={inputs}
+                    action={action}
+                    method={method}
+                    callBack={onCreate}
+                    successUrl='/'
+                    title="기기 등록하기"
+                ></Form>
                 <h3>부모 기기 선택 (현재 선택 : {parentNode.deviceName})</h3>
                 {deviceTree ? deviceTree : (null)}
             </div>

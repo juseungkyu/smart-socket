@@ -1,5 +1,6 @@
 import './input.css'
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useEffect } from 'react';
+
 /**
  * @param {
  *      "label": '',
@@ -10,15 +11,18 @@ import React, { useState } from 'react';
  * } props 
  * @returns Form
  */
-function Input(props) {
-    const { label, type, name, value, readonly} = props;
+function Input(props){
+    const { label, type, name, readonly, value, createTime} = props;
     let { onChange } = props;
+    const [inputValue, setInputValue] = useState(value)
+
+    useEffect(()=>{
+        setInputValue(value)
+    }, [createTime])
 
     if(!onChange){
         onChange = ()=>{}
     }
-
-    const [inputValue, setInputValue] = useState(value);
 
     const handleChange = (e) => {
         setInputValue(e.target.value);

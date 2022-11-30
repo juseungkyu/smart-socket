@@ -2,7 +2,6 @@ import './form.css'
 import Input from './input/Input';
 import Btn from '../btn/Btn';
 import axios from 'axios';
-import { useImperativeHandle } from 'react';
 import { useNavigate } from "react-router-dom";
 
 /**
@@ -21,17 +20,13 @@ import { useNavigate } from "react-router-dom";
  * } props 
  * @returns 
  */
-function Form(props, ref) {
+function Form(props) {
     const navigate = useNavigate();
     const { title, inputs, action, method, children, successUrl, callBack } = props;
 
+    console.log('inputs', inputs)
+
     const valueMap = {}
-
-    console.log(ref)
-
-    // ref.current.changeValue = changeValue = (key, value) => {
-    //     valueMap[key] = value
-    // }
 
     const inputDoms = inputs.map((inputData) => {
         const { label, type, name, value, readonly } = inputData
@@ -42,18 +37,22 @@ function Form(props, ref) {
             valueMap[name] = e.target.value
         }
 
-        return (
-            <Input
+        const input = <Input
                 key={name}
                 label={label}
                 type={type}
                 name={name}
                 value={value}
                 readonly={readonly}
+                createTime={new Date()}
                 onChange={onChange}
             ></Input>
-        )
+        console.log(name, value, input)
+
+        return input
     })
+
+    console.log('valueMap', valueMap)
 
     let isProcessing = false
     const onSubmit = async () => {
