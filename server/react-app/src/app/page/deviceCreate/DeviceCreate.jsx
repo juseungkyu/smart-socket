@@ -4,6 +4,8 @@ import Form from '../../basic/element/form/Form';
 import DeviceTree from './deviceTree/DeviceTree';
 import axios from 'axios';
 
+let deviceTree = null
+
 function DeviceCreate(props) {
     const [deviceList, setDeviceList] = useState([])
     const [parentNode, setParentNode] = useState({
@@ -17,8 +19,6 @@ function DeviceCreate(props) {
         return () => {};
     }, []);
 
-    let deviceTree = null
-
     if(deviceList.length != 0){
         deviceTree = (<DeviceTree 
             deviceList={deviceList}
@@ -26,6 +26,7 @@ function DeviceCreate(props) {
             setParentNode={setParentNode}
         ></DeviceTree>)
     } else {
+        console.log('deviceTree not rerender')
         getDeviceList(setDeviceList)
     }
     
@@ -63,12 +64,7 @@ function DeviceCreate(props) {
             callBack={onCreate}
             successUrl='/'
             title="기기 등록하기"
-            ref={childRef}
         ></Form>
-
-    console.log(childRef)
-
-    childRef.current.changeValue('parentDevice', parentNode.deviceId)
 
     return (
         <section>

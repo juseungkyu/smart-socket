@@ -54,8 +54,10 @@ const createTreeDom = (deviceTree, setParentNode) => {
                 deviceTree.children.map((device)=> {
                     const {deviceId, deviceName, state, isConnect, children} = device
                    
-                    const onClick = (e, device)=>{
-                        setParentNode({deviceId, deviceName})
+                    const onClick = (e1)=>{
+                        const device = {deviceId, deviceName}
+                        console.log('click', device)
+                        setParentNode(device)
                     }
 
                     const node = (
