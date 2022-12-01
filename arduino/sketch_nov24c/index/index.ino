@@ -24,7 +24,7 @@
 
 const char *ssid = "sweethome";
 const char *password = "jsm0701!";
-const char *deviceId = "1";
+const char *deviceId = "3";
 String host = "http://192.168.1.125:3001";
 const long interval = 5000;
 unsigned long previousMillis = 0;
@@ -33,9 +33,11 @@ WiFiClient client;
 HTTPClient http;
 
 int state = 1;
+const int relayPin = 14;
 
 void setup()
 {
+  pinMode(relayPin, OUTPUT);
   // put your setup code here, to run once:
   Serial.begin(115200);
   delay(100);
@@ -65,6 +67,14 @@ void loop()
     heartbeat();
     getParam();
     Serial.println(state);
+    if (state == 1)
+    {
+      digitalWrite(relayPin, HIGH);
+    }
+    else
+    {
+      digitalWrite(relayPin, LOW);
+    }
   }
 }
 
@@ -98,7 +108,6 @@ void getParam()
   http.setTimeout(3000);
 
   int httpCode = http.GET();
-  
 
   if (httpCode > 0)
   {
@@ -118,9 +127,6 @@ void getParam()
   }
 
   http.end();
-
-  
-
 }
 
 int getState(String input)
