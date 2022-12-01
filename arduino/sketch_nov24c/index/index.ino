@@ -1,3 +1,6 @@
+#include <ArduinoJson.h>
+#include <ArduinoJson.hpp>
+
 #include <ArduinoWiFiServer.h>
 #include <BearSSLHelpers.h>
 #include <CertStoreBearSSL.h>
@@ -29,6 +32,8 @@ unsigned long previousMillis = 0;
 WiFiClient client;
 HTTPClient http;
 
+int state = 1;
+
 void setup()
 {
   // put your setup code here, to run once:
@@ -59,6 +64,7 @@ void loop()
     previousMillis = currentMillis;
     heartbeat();
     getParam();
+    Serial.println(state);
   }
 }
 
@@ -92,6 +98,7 @@ void getParam()
   http.setTimeout(3000);
 
   int httpCode = http.GET();
+  
 
   if (httpCode > 0)
   {
@@ -101,6 +108,7 @@ void getParam()
     {
       String payloads = http.getString();
       Serial.println(payloads);
+      state = getState(payloads);
     }
   }
   else
@@ -110,4 +118,30 @@ void getParam()
   }
 
   http.end();
+
+  
+
+}
+
+int getState(String input)
+{
+  StaticJsonDocument<0> filter;
+  filter.set(true);
+
+  StaticJsonDocument<256> doc;
+
+  DeserializationError error = deserializeJson(doc, input, DeserializationOption::Filter(filter));
+
+  if (error)
+  {
+    Serial.print(F("deserializeJson() failed: "));
+    Serial.println(error.f_str());
+    return -1;
+  }
+
+  bool success = doc["success"]; // true
+
+  JsonObject data = doc["data"];
+  int data_state = data["state"]; // 0
+  return data_state;
 }
