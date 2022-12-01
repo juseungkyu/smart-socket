@@ -26,7 +26,7 @@ const char *ssid = "sweethome";
 const char *password = "jsm0701!";
 const char *deviceId = "3";
 String host = "http://192.168.1.125:3001";
-const long interval = 5000;
+const long interval = 2000;
 unsigned long previousMillis = 0;
 
 WiFiClient client;
