@@ -22,10 +22,10 @@
 
 #include <ESP8266HTTPClient.h>
 
-const char *ssid = "sweethome";
-const char *password = "jsm0701!";
+const char *ssid = "Alpha";
+const char *password = "jeongsumin0701";
 const char *deviceId = "3";
-String host = "http://192.168.1.125:3001";
+String host = "http://arduino.pukkuk.pp.ua";
 const long interval = 2000;
 unsigned long previousMillis = 0;
 
@@ -69,11 +69,11 @@ void loop()
     Serial.println(state);
     if (state == 1)
     {
-      digitalWrite(relayPin, HIGH);
+      digitalWrite(relayPin, 1);
     }
     else
     {
-      digitalWrite(relayPin, LOW);
+      digitalWrite(relayPin, 0);
     }
   }
 }
