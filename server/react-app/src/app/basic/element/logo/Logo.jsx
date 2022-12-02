@@ -1,4 +1,4 @@
-import logoImage from './임시로고.jpg'
+import logoImage from './tempLogo.jpg'
 import './logo.css'
 import { Link } from 'react-router-dom';
 
