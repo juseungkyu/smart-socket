@@ -3,6 +3,7 @@ const dotenv = require('dotenv').config();
 const { env } = require("process");
 const mysql = require("promise-mysql");
 
+// db config 설정
 const dbConfig = {
     host: process.env.HOST,
     port: process.env.PORT,

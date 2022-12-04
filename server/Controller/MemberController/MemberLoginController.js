@@ -10,13 +10,16 @@ module.exports = class MemberLoginController extends Controller {
         this.memberDAO = new MemberDAO()
     }
 
+    // 로그인
     post = async (req, res) => {
+        // 올바른 요청인지 검사
         const { memberId, memberPw } = req.body
         if (!memberId || !memberPw) {
-            this.sendResponse(false, 400, { message: '요청이 잘못되었습니다. 입력값 확인 요망t' }, res);
+            this.sendResponse(false, 400, { message: '요청이 잘못되었습니다.' }, res);
             return
         }
 
+        // 회원 조회
         const { result, isSuccess } = await this.memberDAO.loginMember(memberId, memberPw)
 
         if (isSuccess) {
@@ -26,6 +29,7 @@ module.exports = class MemberLoginController extends Controller {
                 path: "/"
             });
             
+            // 세션 생성
             req.session.member_id = result[0].member_id;
 
             this.sendResponse(true, 200, { message: '로그인 성공' }, res);

@@ -5,7 +5,11 @@ module.exports = class extends DAO {
     super()
   }
 
-  //디바이스 가져오는 함수
+  /**
+   * 디바이스 조회
+   * @param deviceId 조회할 디바이스의 id
+   * @returns Object {isSuccess, result} 가 반환됨. result[0]이 없다면 디바이스를 찾을 수 없음
+   */
   async getDevice(deviceId) {
     const result = {}
     const sql = 'select * from device where device_id=?';
@@ -18,7 +22,11 @@ module.exports = class extends DAO {
     }
   }
 
-  // 디바이스 리스트
+  /**
+   * 디바이스 리스트 조회
+   * @param memberId 디바이스를 조회할 멤버의 id
+   * @returns Object {isSuccess, result} 가 반환됨. result에 array 형식으로 값 들어감
+   */
   async getListDevice(memberId) {
     const result = {}
     const sql = 'select * from device where member_id = ?';
@@ -31,7 +39,10 @@ module.exports = class extends DAO {
     }
   }
 
-  // 디바이스 전체
+  /**
+   * 디바이스 전체 조회
+   * @returns Object {isSuccess, result} 가 반환됨. result에 array 형식으로 값 들어감
+   */
   async getAllDevice() {
     const result = {}
     const sql = 'select * from device';
@@ -44,13 +55,22 @@ module.exports = class extends DAO {
     }
   }
 
-  // 장치 추가 함수.
-  // 성공시 true, 실패시 false로 리턴.
+  /**
+   * 등록 가능 디바이스 추가
+   * @param deviceId 디바이스의 아이디
+   * @param deviceName 디바이스의 이름
+   * @param memberId 기본적으로 넣어줄 멤버의 id
+   * @returns Object {isSuccess, result} 가 반환됨.
+   */
   async createDevice(deviceId, deviceName, memberId) {
     const result = {}
     const sql = 'insert into member set ?';
-    const data = { deviceId, deviceName, memberId}
-    
+    const data = {
+      device_id: deviceId,
+      device_name: deviceName,
+      member_id: memberId
+    }
+
     const isSuccess = await this.run(sql, data, result)
 
     return {
@@ -60,8 +80,13 @@ module.exports = class extends DAO {
   }
 
   /**
-  * 디바이스 등록 
-  */
+   * 디바이스 등록
+   * @param deviceId 디바이스의 아이디
+   * @param deviceName 설정할 디바이스의 이름
+   * @param parentDevice 부모 디바이스의 아이디
+   * @param memberId 등록하는 멤버의 아이디
+   * @returns Object {isSuccess, result} 가 반환됨.
+   */
   async applicationDevice(deviceId, deviceName, parentDevice, memberId) {
     const result = {};
     const sql = "UPDATE device SET member_id=?, device_name=?, parent_device=? WHERE device_id=?";
@@ -71,17 +96,21 @@ module.exports = class extends DAO {
 
     return {
       isSuccess,
-      result : result.dbResult
+      result: result.dbResult
     }
   }
 
-  //장치 상태 변경함수
-  // true, false로 반환.
+  /**
+   * 장치 상태 변경
+   * @param deviceId 디바이스의 아이디
+   * @param state 변경할 디바이스의 상태
+   * @returns Object {isSuccess, result} 가 반환됨.
+   */
   async changeDeviceState(deviceId, state) {
     const result = {}
     const sql = 'update device set state=? where device_id=?';
     const data = [state, deviceId]
-    
+
     const isSuccess = await this.run(sql, data, result)
 
     return {
@@ -90,12 +119,17 @@ module.exports = class extends DAO {
     }
   }
 
-  //장치 변경함수
+  /**
+   * 장치 정보 변경
+   * @param deviceId 디바이스의 아이디
+   * @param deviceName 변경할 디바이스의 이름
+   * @returns Object {isSuccess, result} 가 반환됨.
+   */
   async changeDevice(deviceId, deviceName) {
     const result = {}
     const sql = 'update device set device_name=? where device_id=?';
     const data = [deviceName, deviceId]
-    
+
     const isSuccess = await this.run(sql, data, result)
 
     return {
@@ -104,26 +138,16 @@ module.exports = class extends DAO {
     }
   }
 
-  //장치 연결 상태 함수
-  // true, false로 반환.
+  /**
+   * 장치 연결상태 변경
+   * @param deviceId 디바이스의 아이디
+   * @param isConnect 변경할 디바이스의 연결 상태
+   * @returns Object {isSuccess, result} 가 반환됨.
+   */
   async changeDeviceConnect(deviceId, isConnect) {
     const result = {}
     const sql = 'update device set is_connect=? where device_id=?';
     const data = [isConnect, deviceId]
-    
-    const isSuccess = await this.run(sql, data, result)
-
-    return {
-      isSuccess,
-      result: result.dbResult
-    }
-  }
-
-  // 장치 접속
-  async deviceConnect(deviceId, time) {
-    const result = {}
-    const sql = 'UPDATE device SET last_connect=? WHERE device_id=?'
-    const data = {time, deviceId}
 
     const isSuccess = await this.run(sql, data, result)
 

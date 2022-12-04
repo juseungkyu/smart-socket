@@ -12,9 +12,16 @@ module.exports = class UpdateNameController extends Controller {
         this.deviceDAO = new DeviceDAO()
     }
 
+    /**
+     * 디바이스 이름 변경 post 요청 수행
+     * @param {*} req 
+     * @param {*} res 
+     * @returns 
+     */
     post = async (req, res)=>{
         const {deviceId, deviceName} = req.body
 
+        // 올바른 요청인지 검사
         if(!deviceId) {
             console.log(deviceId, deviceName)
             this.sendResponse(false, 400, {message:'디바이스 아이디 값이 확인되지 않았습니다.'}, res);
@@ -27,7 +34,7 @@ module.exports = class UpdateNameController extends Controller {
             return
         }
 
-        const time = Date.now()
+        // 디바이스 이름 변경
         const {isSuccess, result} = await this.deviceDAO.changeDevice(deviceId, deviceName);
 
         if (isSuccess) {
