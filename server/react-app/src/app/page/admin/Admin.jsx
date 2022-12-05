@@ -9,9 +9,12 @@ function Admin(props) {
     const [deviceId, setDeviceId]= useState('');
     const {memberId, isAdmin} = useContext(MemberContext);
 
-    if(!isAdmin) {
-        alert('관리자만 접속 가능 합니다.')
+    console.log(memberId, isAdmin, typeof isAdmin)
+
+    if(isAdmin === '0') {
+        alert('관리자만 접속 가능 합니다.');
         navigate('/');
+        console.log('실행')
         return
     }
 
@@ -35,7 +38,7 @@ function Admin(props) {
 
     return (
         <section>
-            <div className="device container d-flex justify-center align-center">
+            <div className="adminpage container d-flex justify-center align-center">
                 <Form
                     inputs={inputs}
                     action={action}

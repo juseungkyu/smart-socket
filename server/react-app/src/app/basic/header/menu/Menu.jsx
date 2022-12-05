@@ -6,12 +6,13 @@ import MemberContext from "../../../../context/MemberContext";
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { createBrowserHistory } from 'history'
+import { useNavigate } from "react-router-dom";
 
 import './menu.css'
 
 const history = createBrowserHistory()
 
-function getMenu({memberId, setMemberId}) {
+function getMenu(navigate, {memberId, setMemberId, setIsAdmin}) {
     const menuList = [
         <MenuElement name="디바이스 목록" link="/device/list"/>,
         <MenuElement name="디바이스 등록" link="/device/create"/>
@@ -39,6 +40,8 @@ function getMenu({memberId, setMemberId}) {
             }
 
             setMemberId(Cookies.get('member_id'))
+            setIsAdmin(Cookies.get('is_admin'))
+            navigate('/');
             isProcessing = false
         }
 
@@ -50,8 +53,9 @@ function getMenu({memberId, setMemberId}) {
 }
 
 function Menu(props) {
-    const {memberId, setMemberId} = useContext(MemberContext)
-    const menuList = getMenu({memberId, setMemberId})
+    const navigate = useNavigate();
+    const {memberId, setMemberId, setIsAdmin} = useContext(MemberContext)
+    const menuList = getMenu(navigate, {memberId, setMemberId, setIsAdmin})
 
     return(
         <nav className='d-flex menu'>

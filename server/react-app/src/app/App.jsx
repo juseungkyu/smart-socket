@@ -14,17 +14,18 @@ import DeviceList from './page/deviceList/DeviceList';
 import DeviceView from './page/deviceView/DeviceView';
 import Login from './page/login/Login';
 import Join from './page/join/Join';
+import Admin from './page/admin/Admin'
 
 import MemberContext from '../context/MemberContext';
 import Cookies from 'js-cookie';
 
 function App(props) {
 	const [memberId, setMemberId] = useState(Cookies.get('member_id'))
-	// const [memberId, setMemberId] = useState('test')
+	const [isAdmin, setIsAdmin] = useState(Cookies.get('is_admin'))
 
 	return (
 		<div className='App'>
-			<MemberContext.Provider value={{memberId, setMemberId}}>
+			<MemberContext.Provider value={{memberId, setMemberId, isAdmin, setIsAdmin}}>
 				<BrowserRouter >
 					<Header />
 					<Routes>
@@ -36,6 +37,8 @@ function App(props) {
 
 						<Route path="/login" element={<Login />}></Route>
 						<Route path="/join" element={<Join />}></Route>
+
+						<Route path="/admin" element={<Admin />}></Route>
 
 						<Route path="*" element={<NotFound />}></Route>
 					</Routes>

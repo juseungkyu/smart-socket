@@ -60,9 +60,9 @@ module.exports = class extends DAO {
    * @param deviceId 생성할 디바이스의 아이디
    * @returns Object {isSuccess, result} 가 반환됨.
    */
-  async createDevice(deviceId, deviceName, memberId) {
+  async createDevice(deviceId) {
     const result = {}
-    const sql = 'insert into member set ?';
+    const sql = 'insert into device set ?';
     const data = {
       device_id: deviceId
     }

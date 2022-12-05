@@ -18,6 +18,7 @@ module.exports = class MemberLogoutController extends Controller {
         try {
             // 쿠키, 세션 삭제
             res.clearCookie('member_id');
+            res.clearCookie('is_admin');
             req.session.destroy(function (err) {
                 if (err) throw err;
                 req.session;

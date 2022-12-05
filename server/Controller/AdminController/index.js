@@ -1,9 +1,7 @@
-const deleteController = require('./DeleteController')
-const createController = require('./CreateController')
+const adminController = require('./AdminController')
 
 
 module.exports = {
-    createController,
-    deleteController
+    adminController,
 }
   

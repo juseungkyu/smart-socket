@@ -18,30 +18,10 @@ module.exports = class CreateController extends Controller {
      */
     post = async (req, res)=>{
         const {deviceId} = req.body
-        const memberId = req.session.member_id
 
         // 올바른 요청인지 검사
         if (!deviceId) {
             this.sendResponse(false, 400, {message:'잘못된 요청입니다.'}, res);
-            return
-        }
-
-        // 세션 검사
-        if (!memberId) {
-            this.sendResponse(false, 403, {message:'세션이 없습니다.'}, res);
-            return
-        }
-
-        const {result:memberInfo, isSuccess} = this.memberDAO.getMember(memberId);
-        const member = memberInfo[0]
-
-        if(!member) {
-            this.sendResponse(false, 403, {message:'확인되지 않은 아이디 입니다.'}, res);
-            return
-        }
-
-        if (!member.is_admin) {
-            this.sendResponse(false, 403, {message:'관리자가 아닙니다.'}, res);
             return
         }
 

@@ -28,6 +28,10 @@ module.exports = class MemberLoginController extends Controller {
                 maxAge: 60 * 60 * 1000,
                 path: "/"
             });
+            res.cookie('is_admin', result[0].is_admin, {
+                maxAge: 60 * 60 * 1000,
+                path: "/"
+            });
             
             // 세션 생성
             req.session.member_id = result[0].member_id;

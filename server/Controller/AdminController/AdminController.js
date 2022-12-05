@@ -1,10 +1,12 @@
 const Controller = require('../Controller');
 const DeleteController = require('./DeleteController');
 const CreateController = require('./CreateController');
+const MemberDAO = require('../../DAO/MemberDAO');
 
 module.exports = class AdminController extends Controller {
     constructor() {
         super();
+        this.memberDAO = new MemberDAO()
         this.controllers = {
             delete : new DeleteController().get,
             create : new CreateController().post
@@ -26,8 +28,8 @@ module.exports = class AdminController extends Controller {
             return
         }
 
-        const {result:memberInfo, isSuccess} = this.memberDAO.getMember(memberId);
-        const member = memberInfo[0]
+        const {result, isSuccess} = await this.memberDAO.getMember(memberId);
+        const member = result[0]
 
         if(!member) {
             this.sendResponse(false, 403, {message:'확인되지 않은 아이디 입니다.'}, res);
@@ -47,6 +49,6 @@ module.exports = class AdminController extends Controller {
             return
         }
 
-        process()
+        process(req, res)
     }   
 }

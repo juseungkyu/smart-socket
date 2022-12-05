@@ -5,7 +5,7 @@ import { useContext } from "react";
 import Cookies from 'js-cookie';
 
 function Login(props) {
-    const {memberId, setMemberId} = useContext(MemberContext);
+    const {memberId, setMemberId, setIsAdmin} = useContext(MemberContext);
 
     const inputs = [
         {
@@ -26,6 +26,7 @@ function Login(props) {
 
     const onLogin = (response)=>{
         console.log(response)
+        setIsAdmin(Cookies.get('is_admin'))
         setMemberId(Cookies.get('member_id'))
         alert('로그인 성공')
     }
