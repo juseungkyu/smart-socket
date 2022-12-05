@@ -7,10 +7,11 @@ import { useNavigate } from "react-router-dom";
 function Admin(props) {
     const navigate =  useNavigate();
     const [deviceId, setDeviceId]= useState('');
-    const {memberId} = useContext(MemberContext);
+    const {memberId, isAdmin} = useContext(MemberContext);
 
-    if(!memberId || memberId !== 'admin') {
-        navigate(`${successUrl}`);
+    if(!isAdmin) {
+        alert('관리자만 접속 가능 합니다.')
+        navigate('/');
         return
     }
 
@@ -26,11 +27,12 @@ function Admin(props) {
 
     const onCreateDevice = (response)=>{
         setDeviceId('')
-        alert('디바이스 등록 성공')
+        alert('디바이스 생성 성공')
     }
 
-    const action = "/api/device/create"
+    const action = "/api/admin/create"
     const method = "post"
+
     return (
         <section>
             <div className="device container d-flex justify-center align-center">
@@ -40,7 +42,7 @@ function Admin(props) {
                     method={method}
                     callBack={onCreateDevice}
                     successUrl='/admin'
-                    title="디바이스 등록"
+                    title="등록 가능 디바이스 생성"
                 ></Form>
             </div>
         </section>

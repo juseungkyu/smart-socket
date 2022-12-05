@@ -43,7 +43,7 @@ function getMenu({memberId, setMemberId}) {
         }
 
         menuList.push(<MenuElement name="로그아웃" onClick={logoutClick} />)
-        menuList.push(<MenuElement name="" link=""/>)
+        menuList.push(<MenuElement name="관리자" link="/admin"/>)
     }
 
     return menuList
