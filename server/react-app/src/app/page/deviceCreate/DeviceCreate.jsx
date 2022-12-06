@@ -6,6 +6,11 @@ import axios from 'axios';
 
 let deviceTree = null
 
+/**
+ * 디바이스 등록 페이지를 출력함
+ * @param {*} props 
+ * @returns 디바이스 등록 페이지
+ */
 function DeviceCreate(props) {
     const [deviceList, setDeviceList] = useState([])
     const [parentNode, setParentNode] = useState({

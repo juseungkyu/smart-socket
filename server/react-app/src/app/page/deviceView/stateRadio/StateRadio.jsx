@@ -1,6 +1,7 @@
 import './stateRadio.css'
 import React, { useState } from 'react';
 /**
+ * 디바이스 상태 radio 버튼
  * @param {
  *      "label": '',
  *      "type": 'text, number'
@@ -21,6 +22,7 @@ function StateRadio(props) {
         setInputValue(e.target.value);
     };
 
+    // onChange를 이용해 상위 컴포넌트에 변경된 값 전달
     return (
         <div className='state-radio'>
             <p>현재상태</p>

@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 
-
 import reportWebVitals from './reportWebVitals';
 
 import App from './app/App';
 
+// 렌더 
 function render(){
   const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(

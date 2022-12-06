@@ -3,9 +3,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DeviceTree from './deviceTree/DeviceTree';
 
+/**
+ * 유저의 디바이스를 모두 출력 (현재는 트리 형식으로 출력함)
+ * @param {*} props 
+ * @returns deviceList
+ */
 function DeviceList(props) {
     const [deviceList, setDeviceList] = useState([])
 
+    // 페이지가 새로 로딩되면 값 새로 불러오기
     useEffect(() => {
         isProcessed = false
         createPage(setDeviceList)
@@ -21,6 +27,7 @@ function DeviceList(props) {
     );
 }
 
+// 비동기로 페이지 설정
 let isProcessed = false;
 const createPage = async (setDeviceList) => {
     if (isProcessed) {
@@ -28,6 +35,7 @@ const createPage = async (setDeviceList) => {
     }
     isProcessed = true
 
+    // 정보 불러오기
     let deviceList = []
     const config = { "Content-Type": 'application/json' };
     try {

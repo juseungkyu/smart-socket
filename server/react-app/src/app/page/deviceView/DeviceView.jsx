@@ -7,11 +7,17 @@ import StateRadio from './stateRadio/StateRadio'
 
 import axios from 'axios';
 
+/**
+ * 디바이스 정보 페이지
+ * @param {*} props 
+ * @returns not found page
+ */
 function DeviceView(props) {
     const [ page, setPage ] = useState((null));
 
     let { deviceId } = useParams();
 
+    // 새로 로딩될 떄마다 초기화
     useEffect(() => {
         isProcessed = false
         createPage(setPage, deviceId)
@@ -29,6 +35,7 @@ async function createPage (setPage, deviceId) {
     }
     isProcessed = true
 
+    // 디바이스 정보 받아오기
     let device = null
     const config = { "Content-Type": 'application/json' };
     try {
@@ -47,6 +54,7 @@ async function createPage (setPage, deviceId) {
         state
     } = device
     
+    // form에 넣을 input list
     const inputs = [
         {
             "label": 'name',
@@ -67,6 +75,8 @@ async function createPage (setPage, deviceId) {
     const method = 'post'
 
     const stateObj = {state}
+
+    // 이름 변경 후 현재 상태 변경
     const onUpdate = async  () => {
         const isSuccess = await updateState(stateObj.state, deviceId)
         if(isSuccess){
@@ -81,6 +91,7 @@ async function createPage (setPage, deviceId) {
         stateObj['state'] = e.target.value
     } 
 
+    // 새로 불러올 페이지 설정
     const page = (
         <section>
             <div className="deviceView gap-3 container d-flex flex-col align-center">
@@ -105,11 +116,10 @@ async function createPage (setPage, deviceId) {
         </section>
     );
 
-    console.log(page)
     setPage(page)
 }
 
-
+// 현재 상태 변경
 async function updateState(state, deviceId) {
     const config = { "Content-Type": 'application/json' };
     const data = {state, deviceId}

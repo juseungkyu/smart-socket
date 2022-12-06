@@ -19,7 +19,13 @@ import Admin from './page/admin/Admin'
 import MemberContext from '../context/MemberContext';
 import Cookies from 'js-cookie';
 
+/**
+ * 최상위 요소
+ * @param {*} props 
+ * @returns app 
+ */
 function App(props) {
+	// 세션 정보 받아오기 
 	const [memberId, setMemberId] = useState(Cookies.get('member_id'))
 	const [isAdmin, setIsAdmin] = useState(Cookies.get('is_admin'))
 
