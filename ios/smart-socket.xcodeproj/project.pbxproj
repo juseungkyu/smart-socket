@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF6A1BB0293F33350053C2A6 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A1BAF293F33350053C2A6 /* WebViewController.swift */; };
 		BF821E4F293E39650045371B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF821E4E293E39650045371B /* AppDelegate.swift */; };
 		BF821E51293E39650045371B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF821E50293E39650045371B /* SceneDelegate.swift */; };
 		BF821E53293E39650045371B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF821E52293E39650045371B /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BF6A1BAF293F33350053C2A6 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		BF821E4B293E39650045371B /* smart-socket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "smart-socket.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF821E4E293E39650045371B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF821E50293E39650045371B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		BF821E4D293E39650045371B /* smart-socket */ = {
 			isa = PBXGroup;
 			children = (
+				BF6A1BAF293F33350053C2A6 /* WebViewController.swift */,
 				BF821E4E293E39650045371B /* AppDelegate.swift */,
 				BF821E50293E39650045371B /* SceneDelegate.swift */,
 				BF821E52293E39650045371B /* ViewController.swift */,
@@ -261,6 +264,7 @@
 				BF821E53293E39650045371B /* ViewController.swift in Sources */,
 				BF821E4F293E39650045371B /* AppDelegate.swift in Sources */,
 				BF821E51293E39650045371B /* SceneDelegate.swift in Sources */,
+				BF6A1BB0293F33350053C2A6 /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

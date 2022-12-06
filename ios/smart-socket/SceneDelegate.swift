@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  smart-socket
+//  WebView
 //
-//  Created by 정수민 on 2022/12/05.
+//  Created by 김후정 on 2022/07/05.
 //
 
 import UIKit
