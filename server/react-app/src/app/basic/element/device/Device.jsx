@@ -1,7 +1,11 @@
 import './device.css'
-import Btn from '../btn/Btn';
 import { Link } from 'react-router-dom';
 
+/**
+ * Device 컴포넌트
+ * @param {*} props 
+ * @returns Device
+ */
 function Device(props) {
     const {
         deviceId,

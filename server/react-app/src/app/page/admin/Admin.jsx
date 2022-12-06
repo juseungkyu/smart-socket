@@ -4,6 +4,11 @@ import MemberContext from '../../../context/MemberContext';
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * 관리자 페이지 (등록가능 디바이스 생성)
+ * @param {*} props 
+ * @returns admin page
+ */
 function Admin(props) {
     const navigate =  useNavigate();
     const [deviceId, setDeviceId]= useState('');
@@ -11,6 +16,7 @@ function Admin(props) {
 
     console.log(memberId, isAdmin, typeof isAdmin)
 
+    // 관리자인지 확인
     if(isAdmin === '0') {
         alert('관리자만 접속 가능 합니다.');
         navigate('/');

@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 import './menuElement.css'
 
+/**
+ * MenuElement 컴포넌트
+ * @param {*} props 
+ * @returns MenuElement
+ */
 function MenuElement(props) {
     const {name, link} = props;
     let {onClick} = props

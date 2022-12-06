@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 /**
- * 
+ * Form 컴포넌트 
  * @param {
  *      "inputs" : {
  *          "label": '',
@@ -14,11 +14,13 @@ import { useNavigate } from "react-router-dom";
  *          "value": ''
  *          "callBack": ''
  *          "readonly": ''
+ *          "createTime": date
+ *          "onChange": function
  *      },
  *      "action" : url
  *      "method" : get or post or delete or put,
  * } props 
- * @returns 
+ * @returns Form
  */
 function Form(props) {
     const navigate = useNavigate();
@@ -28,6 +30,7 @@ function Form(props) {
 
     const valueMap = {}
 
+    // inputs를 input dom list로 변환
     const inputDoms = inputs.map((inputData) => {
         const { label, type, name, value, readonly } = inputData
 
@@ -54,6 +57,7 @@ function Form(props) {
 
     console.log('valueMap', valueMap)
 
+    // 제출버튼 클릭 시 실행
     let isProcessing = false
     const onSubmit = async () => {
         if (isProcessing) {

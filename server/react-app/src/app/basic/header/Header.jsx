@@ -3,6 +3,11 @@ import Menu from "./menu/Menu";
 
 import './header.css'
 
+/**
+ * 헤더 
+ * @param {*} props 
+ * @returns header
+ */
 function Header(props) {
     return (
         <header>

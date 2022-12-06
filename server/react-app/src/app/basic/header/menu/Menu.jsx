@@ -12,6 +12,12 @@ import './menu.css'
 
 const history = createBrowserHistory()
 
+/**
+ * 로그인 상태에 따라서 MenuElement List를 반환해줌
+ * @param navigate createBrowserHistory()
+ * @param {*} param1 
+ * @returns MenuElement List
+ */
 function getMenu(navigate, {memberId, setMemberId, setIsAdmin}) {
     const menuList = [
         <MenuElement name="디바이스 목록" link="/device/list"/>,
@@ -52,6 +58,11 @@ function getMenu(navigate, {memberId, setMemberId, setIsAdmin}) {
     return menuList
 }
 
+/**
+ * Menu 컴포넌트
+ * @param {*} props 
+ * @returns Menu
+ */
 function Menu(props) {
     const navigate = useNavigate();
     const {memberId, setMemberId, setIsAdmin} = useContext(MemberContext)

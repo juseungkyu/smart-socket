@@ -2,6 +2,7 @@ import './input.css'
 import React, { useState, forwardRef, useEffect } from 'react';
 
 /**
+ * Input 컴포넌트
  * @param {
  *      "label": '',
  *      "type": 'text, number'
@@ -9,7 +10,7 @@ import React, { useState, forwardRef, useEffect } from 'react';
  *      "value": ''
  *      "readonly": boolean: 
  * } props 
- * @returns Form
+ * @returns Input
  */
 function Input(props){
     const { label, type, name, readonly, value, createTime} = props;

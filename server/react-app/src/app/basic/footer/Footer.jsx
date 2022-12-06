@@ -2,6 +2,11 @@ import './footer.css'
 import Logo from '../element/logo/Logo';
 import { Link } from 'react-router-dom';
 
+/**
+ * 푸터 컴포넌트
+ * @param {*} props 
+ * @returns Footer
+ */
 function Footer(props) {
     return(
         <footer>
