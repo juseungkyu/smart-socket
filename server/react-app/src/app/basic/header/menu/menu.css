@@ -2,3 +2,10 @@
     width: 50%;
     display: flex;
 }
+
+
+@media screen and (max-width: 480px) {
+    .menu {
+        width: 80%;
+    }
+}

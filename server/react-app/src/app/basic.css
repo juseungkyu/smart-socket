@@ -109,3 +109,16 @@ ul {
 .flex-col {
     flex-direction: column;
 }
+
+
+@media screen and (max-width: 480px) {
+    .container {
+        width: 450px;
+    }
+
+
+    body {
+        padding-bottom: 0px;
+    }
+
+}
