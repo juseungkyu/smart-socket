@@ -31,3 +31,10 @@
 ## 프로젝트 상세설명
 
 사용자가 회원가입하고, 플러그의 고유 아이디 값을 이용하여 기기 등록을 하면, 플러그를 제어할 수 있습니다.
+
+## 실제 작동 이미지
+
+![캡처1](https://user-images.githubusercontent.com/77566626/206421278-3a35e354-c71e-4d65-9183-d1c9a9de3f68.PNG)
+![캡처](https://user-images.githubusercontent.com/77566626/206421270-f3311f24-e789-448d-8b4e-fa4d0a60bdd7.PNG)
+![IMG_0582](https://user-images.githubusercontent.com/77566626/206420718-7b9b1444-51b5-4e09-b9dd-de7acf9b1091.jpg)
+![IMG_0597](https://user-images.githubusercontent.com/77566626/206420725-5f81b3f7-f7e9-4174-b2c7-18cac416a6d9.jpg)
