@@ -2,7 +2,6 @@
 //  SceneDelegate.swift
 //  WebView
 //
-//  Created by 김후정 on 2022/07/05.
 //
 
 import UIKit

@@ -32,56 +32,67 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="q3S-2t-u9u">
-                                <rect key="frame" x="50" y="355" width="314" height="186.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="q3S-2t-u9u">
+                                <rect key="frame" x="64" y="355" width="300" height="186.5"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dZZ-Qx-gAo">
-                                        <rect key="frame" x="7" y="0.0" width="300" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dZZ-Qx-gAo">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="iHR-Lo-ThT"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wiw-QP-t3Z">
-                                        <rect key="frame" x="7" y="76" width="300" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PWD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wiw-QP-t3Z">
+                                        <rect key="frame" x="0.0" y="76" width="300" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="73S-zE-DFi"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="tappedSearch:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="zhA-9Q-7fE"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="253-2z-haN">
-                                        <rect key="frame" x="82" y="152" width="150" height="34.5"/>
+                                        <rect key="frame" x="75" y="152" width="150" height="34.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="vNi-jI-p0d"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Search"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="로그인하기"/>
                                         <connections>
                                             <action selector="tappedSearch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hNA-Ph-ylk"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="스마트소켓 로그인" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Fu-iD-WHh">
+                                <rect key="frame" x="118" y="178" width="178" height="86"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="86" id="2cT-sp-Rfi"/>
+                                    <constraint firstAttribute="width" constant="178" id="wJE-c4-6lY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="q3S-2t-u9u" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mil-TD-BAe"/>
-                            <constraint firstItem="q3S-2t-u9u" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="O3o-D8-Rsd"/>
-                            <constraint firstItem="q3S-2t-u9u" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="X3c-LI-cN0"/>
+                            <constraint firstItem="2Fu-iD-WHh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4u9-21-DqK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="q3S-2t-u9u" secondAttribute="trailing" constant="50" id="v5i-8l-ANb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZgU-xT-w1s"/>
                     <connections>
-                        <outlet property="userId" destination="dZZ-Qx-gAo" id="Ise-Xa-1g7"/>
+                        <outlet property="userPwd" destination="wiw-QP-t3Z" id="pDh-T2-fMl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="70"/>
+            <point key="canvasLocation" x="28.985507246376812" y="69.642857142857139"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="XHf-P5-Df9">

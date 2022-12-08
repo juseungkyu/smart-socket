@@ -3,6 +3,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var userId: UITextField!
+    @IBOutlet weak var userPwd: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +16,8 @@ class ViewController: UIViewController {
 
     /** 웹 뷰로 이동 */
     @IBAction func tappedSearch(_ sender: Any) {
-        let text: String = userId.text!
+        let id: String = userId.text!
+        let pwd: String = userPwd.text!
         
         if let navigationController = self.navigationController {
             
@@ -23,7 +25,7 @@ class ViewController: UIViewController {
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let viewController = storyBoard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
                 
-                viewController.search = text
+                viewController.search = id
                 viewController.url = "https://arduino.pukkuk.pp.ua/login"
                 
                 navigationController.pushViewController(viewController, animated: true)
