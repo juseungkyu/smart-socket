@@ -7,6 +7,17 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        /* 웹뷰로 이동하기 */
+        if let navigationController = self.navigationController {
+
+            if !(navigationController.topViewController?.description.contains("WebViewController"))! {
+                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = storyBoard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+                viewController.url = "https://arduino.pukkuk.pp.ua/login"
+
+                navigationController.pushViewController(viewController, animated: true)
+            }
+        }
         
     }
     
@@ -14,23 +25,5 @@ class ViewController: UIViewController {
         self.view.endEditing(true)
     }
 
-    /** 웹 뷰로 이동 */
-    @IBAction func tappedSearch(_ sender: Any) {
-        let id: String = userId.text!
-        let pwd: String = userPwd.text!
-        
-        if let navigationController = self.navigationController {
-            
-            if !(navigationController.topViewController?.description.contains("WebViewController"))! {
-                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let viewController = storyBoard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
-                
-                viewController.search = id
-                viewController.url = "https://arduino.pukkuk.pp.ua/login"
-                
-                navigationController.pushViewController(viewController, animated: true)
-            }
-        }
-    }
 }
 
