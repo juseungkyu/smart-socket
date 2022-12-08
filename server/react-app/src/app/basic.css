@@ -111,7 +111,7 @@ ul {
 }
 
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
     .container {
         width: 450px;
     }
