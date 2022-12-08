@@ -15,19 +15,22 @@ class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /** 네비게이션 바 타이틀 */
-        self.navigationItem.title = search
-        
         let preferences = WKPreferences()
         preferences.javaScriptEnabled = true
         preferences.javaScriptCanOpenWindowsAutomatically = true
+        preferences.isTextInteractionEnabled = true
+        preferences.isElementFullscreenEnabled = true
+        
         
         let contentController = WKUserContentController()
         contentController.add(self, name: "bridge")
         
+        
         let configuration = WKWebViewConfiguration()
         configuration.preferences = preferences
         configuration.userContentController = contentController
+        
+       
         
         webView = WKWebView(frame: self.view.bounds, configuration: configuration)
         
@@ -38,10 +41,19 @@ class WebViewController: UIViewController {
         
         webView.uiDelegate = self
         webView.navigationDelegate = self
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webViewGroup.addSubview(webView)
         setAutoLayout(from: webView, to: webViewGroup)
-        webView.load(request)
+        let javascript = """
+        var meta = document.createElement('meta');
+            meta.setAttribute('name', 'viewport');
+            meta.setAttribute('content', 'width=device-width, shrink-to-fit=YES');
+            document.getElementByTagName('head')[0].appendChild(meta);
+
+        """
         
+        webView.load(request)
+        webView.evaluateJavaScript(javascript)
         webView.alpha = 0
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
             self.webView.alpha = 1
