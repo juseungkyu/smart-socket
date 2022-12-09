@@ -1,9 +1,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBOutlet weak var userId: UITextField!
-    @IBOutlet weak var userPwd: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,8 +10,8 @@ class ViewController: UIViewController {
             if !(navigationController.topViewController?.description.contains("WebViewController"))! {
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let viewController = storyBoard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
-                viewController.url = "https://arduino.pukkuk.pp.ua/login"
-
+                viewController.url = "https://arduino.pukkuk.pp.ua"
+                
                 navigationController.pushViewController(viewController, animated: true)
             }
         }

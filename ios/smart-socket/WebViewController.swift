@@ -30,12 +30,9 @@ class WebViewController: UIViewController {
         configuration.preferences = preferences
         configuration.userContentController = contentController
         
-       
-        
         webView = WKWebView(frame: self.view.bounds, configuration: configuration)
         
         var components = URLComponents(string: url)!
-        components.queryItems = [ URLQueryItem(name: "query", value: search) ]
         
         let request = URLRequest(url: components.url!)
         
@@ -47,13 +44,15 @@ class WebViewController: UIViewController {
         let javascript = """
         var meta = document.createElement('meta');
             meta.setAttribute('name', 'viewport');
-            meta.setAttribute('content', 'width=device-width, shrink-to-fit=YES');
+            meta.setAttribute('content', 'width="device-width"');
+            meta.setAttribute('content', 'shrink-to-fit=YES');
             document.getElementByTagName('head')[0].appendChild(meta);
 
         """
-        
+        webView.evaluateJavaScript(javascript)
         webView.load(request)
         webView.evaluateJavaScript(javascript)
+        print(webView)
         webView.alpha = 0
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
             self.webView.alpha = 1
@@ -65,7 +64,7 @@ class WebViewController: UIViewController {
     /** auto leyout 설정 */
     public func setAutoLayout(from: UIView, to: UIView) {
         
-        from.translatesAutoresizingMaskIntoConstraints = false
+        from.translatesAutoresizingMaskIntoConstraints = true
         NSLayoutConstraint.init(item: from, attribute: .leading, relatedBy: .equal, toItem: to, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint.init(item: from, attribute: .trailing, relatedBy: .equal, toItem: to, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint.init(item: from, attribute: .top, relatedBy: .equal, toItem: to, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
